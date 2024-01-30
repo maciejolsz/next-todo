@@ -3,31 +3,49 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --foreground-rgb: 14, 14, 14;
+  --background-rgb: 236, 236, 236;
+  --background-content-rgb: 244, 244, 244;
+  --url-rgb: 241, 121, 75;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --background-rgb: 14, 14, 14;
   }
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: rgb(var(--background-rgb));
+
+}
+
+body a {
+  color: rgb(var(--url-rgb));
+}
+
+body a:hover {
+  text-decoration: underline;
+}
+
+
+@layer components {
+  /** sample custom class */
+  /*.c-container {*/
+  /*  @apply bg-[rgb(var(--background-content-rgb))] rounded-3xl*/
+  /*  hover:rounded-xl hover:bg-gray-300*/
+  /*}*/
+  .content {
+    width: 1248px;
+    @apply mx-auto
+    /*border-2 border-black;*/
+  }
 }
 
 @layer utilities {
   .text-balance {
-    text-wrap: balance;
+    text-wrap: normal;
   }
 }
