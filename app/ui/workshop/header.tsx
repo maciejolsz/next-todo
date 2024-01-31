@@ -23,9 +23,9 @@ export default function Header() {
       <Link href={"/workshop"}>Workshop</Link>
     </div>
     <nav>
-      {links.map((link) => {
+      {links.map((link, i) => {
         const LinkIcon = link.icon;
-        return <NavButton  title={link.name} url={link.url}><LinkIcon className={"w-5 inline"} /></NavButton>
+        return <NavButton key={i} title={link.name} url={link.url}><LinkIcon className={"w-5 inline"} /></NavButton>
       })}
 
     </nav>
