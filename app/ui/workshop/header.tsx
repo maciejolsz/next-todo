@@ -1,36 +1,35 @@
 import Link from "next/link";
 import NavButton from "@/app/ui/nav-button";
-import {Newsreader} from "next/font/google"
+import { Newsreader } from "next/font/google"
+import { BiListCheck, BiCalendar, BiTimer, BiHomeAlt, BiFace, BiWrench } from "react-icons/bi";
+
 const newsreader = Newsreader({ subsets: ['latin'] })
-import {
-  HomeIcon,
-  PlayCircleIcon,
-  ClipboardDocumentListIcon,
-  UserIcon,
-  CalendarIcon
-} from '@heroicons/react/24/outline';
 
 const links = [
-  { name: 'Home', url: '/workshop', icon: HomeIcon },
-  { name: 'TODOs', url: '/workshop/todos', icon: ClipboardDocumentListIcon,},
-  { name: 'Calendar', url: '/workshop/calendar', icon: CalendarIcon },
-  { name: 'Pomodoro', url: '/workshop/pomodoro', icon: PlayCircleIcon },
+  { name: 'Home', url: '/workshop', icon: BiHomeAlt },
+  { name: 'TODOs', url: '/workshop/todos', icon: BiListCheck,},
+  { name: 'Calendar', url: '/workshop/calendar', icon: BiCalendar },
+  { name: 'Pomodoro', url: '/workshop/pomodoro', icon: BiTimer },
 ];
 
 export default function Header() {
+  const iconClass = "inline pb-1";
   return <div className="w-full py-[40px] flex-row justify-between items-center inline-flex">
     <div className={`text-[32px] ${newsreader.className}`}>
-      <Link href={"/workshop"}>Workshop</Link>
+      <Link href={"/workshop"}><BiWrench size="32" className={"inline pb-1 mr-1"}/>Workshop</Link>
     </div>
-    <nav>
+    <nav className={""}>
       {links.map((link, i) => {
         const LinkIcon = link.icon;
-        return <NavButton key={i} title={link.name} url={link.url}><LinkIcon className={"w-5 inline"} /></NavButton>
+        return <NavButton key={i} title={link.name} url={link.url}>
+          <LinkIcon size="24" className={iconClass} />
+        </NavButton>
       })}
-
     </nav>
     <div>
-      <NavButton title={"Profile"} url={"/profile"}><UserIcon className={"w-5 inline"} /></NavButton>
+      <NavButton title={"Profile"} url={"/profile"}>
+        <BiFace size="24" className={iconClass} />
+      </NavButton>
     </div>
   </div>
 }
