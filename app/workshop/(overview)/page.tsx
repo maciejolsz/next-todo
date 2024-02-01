@@ -7,10 +7,10 @@ const newsreader = Newsreader({ subsets: ['latin'] })
 export default function Page() {
   return (<>
     <main>
-      <h1 className={`text-[32px] text-center mb-8 ${newsreader.className}`}>Where you'd like to start?</h1>
+      <h1 className={`text-[32px] text-center mb-8 ${newsreader.className}`}>Where do we start?</h1>
       <div className={"flex flex-row px-40"}>
-        {homeCards.map((cardProps: CardType) => {
-          return <Card {...cardProps} />
+        {homeCards.map((cardProps: CardType, key) => {
+          return <Card key={key} {...cardProps} />
         })}
       </div>
     </main>

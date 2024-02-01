@@ -22,13 +22,13 @@ export default function Card(props: CardType) {
         <CardIcon className={"h-full w-1/2 mx-auto"}/>
       </div>
       <div className={"w-full pl-6 pb-6 pr-6 bg-white"}>
-        <div className={`text-black text-lg font-semibold leading-relaxed ${inter.className}`}>
+        <div className={`text-black text-lg leading-relaxed ${inter.className}`}>
           {props.title}
         </div>
-        <p className={`text-orange-400 text-lg font-normal leading-relaxed ${inter.className}`}>
+        <p className={`text-orange-400 text-sm leading-relaxed ${inter.className}`}>
           {props.desc}
         </p>
-        <p className={`text-neutral-500 text-sm font-normal leading-normal ${inter.className}`}>
+        <p className={`text-neutral-500 text-sm leading-normal ${inter.className}`}>
           {props.subDesc}
         </p>
       </div>
