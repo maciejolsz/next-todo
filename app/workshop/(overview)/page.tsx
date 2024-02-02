@@ -1,6 +1,6 @@
-import { Newsreader } from "next/font/google";
 import Card, {CardType} from "@/app/ui/workshop/card";
 import { homeCards } from "@/app/workshop/(overview)/config";
+import { Newsreader } from "next/font/google";
 
 const newsreader = Newsreader({ subsets: ['latin'] })
 

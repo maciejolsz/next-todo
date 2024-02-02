@@ -13,6 +13,7 @@ const todos = [
         name: 'Read Atomic habits',
         details: 'I need to improve my habits step by step. Heard some good opinions!',
         status: 'new',
+        priority: 'normal',
     }
 ]
 

@@ -51,7 +51,8 @@ async function seedTodos(client) {
             id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
             name VARCHAR(255) NOT NULL,
             details VARCHAR(255) NOT NULL,
-            status VARCHAR(255) NOT NULL
+            status VARCHAR(255) NOT NULL,
+            priority VARCHAR(255) NOT NULL
           );
         `;
 
@@ -60,8 +61,8 @@ async function seedTodos(client) {
         // Insert data into the "todos" table
         const insertedTodos = await Promise.all(
             todos.map(todo => client.sql`
-                        INSERT INTO todos (name, details, status)
-                        VALUES (${todo.name}, ${todo.details}, ${todo.status})
+                        INSERT INTO todos (name, details, status, priority)
+                        VALUES (${todo.name}, ${todo.details}, ${todo.status}, ${todo.priority})
                         ON CONFLICT (id) DO NOTHING;
                     `,
                 ),
