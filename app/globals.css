@@ -4,15 +4,14 @@
 
 :root {
   --black-rgb: 14, 14, 14;
-  --gray-rgb: 236, 236, 236;
-  --white-rgb: 244, 244, 244;
+  --gray-rgb: 244, 244, 244;
+  --white-rgb: 253, 253, 253;
   --orange-rgb: 241, 121, 75;
 }
 
 body {
   color: rgb(var(--black-rgb));
-  background: rgb(var(--white-rgb));
-
+  background: rgb(var(--gray-rgb));
 }
 
 /*body a {*/
@@ -34,6 +33,7 @@ body {
     @apply mx-auto
     /*border-2 border-black;*/
   }
+  .main-content { @apply p-6 bg-white-rgb}
 }
 
 @layer utilities {

@@ -1,14 +1,17 @@
-import { Newsreader } from "next/font/google";
-import {Suspense} from "react";
+import { Suspense } from "react";
 import TodoList from "@/app/ui/workshop/todos/todolist";
-
-const newsreader = Newsreader({ subsets: ['latin'] })
+import AddToDo from "@/app/ui/workshop/todos/add-todo";
+import Header from "@/app/ui/header";
 
 export default function Page() {
   return <main>
-    <h1 className={`text-[32px] text-center mb-8 ${newsreader.className}`}>Your tasks</h1>
-    <Suspense key={"todos"} fallback={<div>Loading....</div>}>
-      <TodoList />
-    </Suspense>
+    <Header text={"Your tasks"} />
+
+    <div className={"main-content"}>
+      <AddToDo />
+      <Suspense key={"todos"} fallback={<div>Loading....</div>}>
+        <TodoList/>
+      </Suspense>
+    </div>
   </main>
 }

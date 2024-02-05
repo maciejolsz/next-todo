@@ -1,10 +1,10 @@
-import Header from "@/app/ui/workshop/header";
+import PageHeader from "@/app/ui/workshop/page-header";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="w-screen">
       <div className="content">
-        <Header />
+        <PageHeader />
 
         <section>
           {children}

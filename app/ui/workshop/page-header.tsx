@@ -12,7 +12,7 @@ const links = [
   { name: 'Pomodoro', url: '/workshop/pomodoro', icon: BiTimer },
 ];
 
-export default function Header() {
+export default function PageHeader() {
   const iconClass = "inline pb-1";
   return <div className="w-full py-[40px] flex-row justify-between items-center inline-flex">
     <div className={`text-[32px] ${newsreader.className}`}>
