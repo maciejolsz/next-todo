@@ -36,7 +36,7 @@ export default function AddToDo() {
           <Typography id="modal-modal-description" className={"my-0"}>
             <form>
               <TextField id="name" label="Task name" variant="outlined" className={"w-full my-2"}/>
-              <TextField id="details" label="Details" variant="outlined" className={"w-full my-2"}/>
+              <TextField id="details" label="Details" multiline minRows={2} variant="outlined" className={"w-full my-2"}/>
               <Box className={"my-2"}>
                 <FormControl fullWidth>
                   <InputLabel id="priority">Priority</InputLabel>
