@@ -5,7 +5,7 @@ import Header from "@/app/ui/header";
 
 export default function Page() {
   return <main>
-    <Header text={"Your tasks"} />
+    <Header text={"Manage your tasks."} />
 
     <div className={"main-content"}>
       <AddToDo />

@@ -16,7 +16,7 @@ export default function PageHeader() {
   const iconClass = "inline pb-1";
   return <div className="w-full py-[40px] flex-row justify-between items-center inline-flex">
     <div className={`text-[32px] ${newsreader.className}`}>
-      <Link href={"/workshop"}><BiWrench size="32" className={"inline pb-1 mr-1"}/>Workshop</Link>
+      <Link href={"/workshop"}><BiWrench size="32" className={"inline pb-1 mr-1"}/>Workshop.</Link>
     </div>
     <nav className={""}>
       {links.map((link, i) => {
