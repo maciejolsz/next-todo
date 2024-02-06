@@ -1,11 +1,11 @@
 import { Suspense } from "react";
 import TodoList from "@/app/ui/workshop/todos/todolist";
 import AddToDo from "@/app/ui/workshop/todos/add-todo";
-import Header from "@/app/ui/header";
+import Title from "@/app/ui/title";
 
 export default function Page() {
   return <main>
-    <Header text={"Manage your tasks."} />
+    <Title text={"Manage your tasks."} />
 
     <div className={"main-content"}>
       <AddToDo />
