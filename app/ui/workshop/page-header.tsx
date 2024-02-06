@@ -1,11 +1,14 @@
+"use client"
+
 import Link from "next/link";
-import NavButton from "@/app/ui/nav-button";
+import MyButton from "@/app/ui/my-button";
 import { Newsreader } from "next/font/google"
 import { BiListCheck, BiCalendar, BiTimer, BiHomeAlt, BiFace, BiWrench } from "react-icons/bi";
+import { usePathname } from "next/navigation";
 
 const newsreader = Newsreader({ subsets: ['latin'] })
 
-const links = [
+const menuItems = [
   { name: 'Home', url: '/workshop', icon: BiHomeAlt },
   { name: 'TODOs', url: '/workshop/todos', icon: BiListCheck,},
   { name: 'Calendar', url: '/workshop/calendar', icon: BiCalendar },
@@ -13,23 +16,32 @@ const links = [
 ];
 
 export default function PageHeader() {
+  const currentPath = usePathname();
+  const workshopPath = "/workshop/profile";
   const iconClass = "inline pb-1";
+
   return <div className="w-full py-[40px] flex-row justify-between items-center inline-flex">
     <div className={`text-[32px] ${newsreader.className}`}>
       <Link href={"/workshop"}><BiWrench size="32" className={"inline pb-1 mr-1"}/>Workshop.</Link>
     </div>
+
     <nav className={""}>
-      {links.map((link, i) => {
-        const LinkIcon = link.icon;
-        return <NavButton key={i} title={link.name} url={link.url}>
-          <LinkIcon size="24" className={iconClass} />
-        </NavButton>
+      {menuItems.map((menuItem, i) => {
+        const LinkIcon = menuItem.icon;
+        return <Link key={i} href={menuItem.url}>
+          <MyButton title={menuItem.name} isActive={currentPath === menuItem.url}>
+            <LinkIcon size="24" className={iconClass} />
+          </MyButton>
+        </Link>
       })}
     </nav>
+
     <div>
-      <NavButton title={"Profile"} url={"/profile"}>
-        <BiFace size="24" className={iconClass} />
-      </NavButton>
+      <Link href={workshopPath}>
+        <MyButton title={"Profile"} isActive={currentPath === workshopPath}>
+          <BiFace size="24" className={iconClass} />
+        </MyButton>
+      </Link>
     </div>
   </div>
 }

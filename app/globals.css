@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --black-rgb: 14, 14, 14;
+  --black-rgb: 88, 88, 88;
   --gray-rgb: 244, 244, 244;
   --white-rgb: 253, 253, 253;
   --orange-rgb: 241, 121, 75;
@@ -40,6 +40,7 @@ h3 { @apply text-xl}
     /*border-2 border-black;*/
   }
   .main-content { @apply p-6 bg-white-rgb}
+  .button-bw { @apply text-white-rgb bg-black-rgb hover:bg-orange-rgb hover:border-orange-rgb }
 }
 
 @layer utilities {
