@@ -10,7 +10,7 @@ const newsreader = Newsreader({ subsets: ['latin'] })
 
 const menuItems = [
   { name: 'Home', url: '/workshop', icon: BiHomeAlt },
-  { name: 'TODOs', url: '/workshop/todos', icon: BiListCheck,},
+  { name: 'Tasks', url: '/workshop/tasks', icon: BiListCheck,},
   { name: 'Calendar', url: '/workshop/calendar', icon: BiCalendar },
   { name: 'Pomodoro', url: '/workshop/pomodoro', icon: BiTimer },
 ];

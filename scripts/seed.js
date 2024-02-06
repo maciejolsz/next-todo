@@ -1,6 +1,6 @@
 const { db } = require('@vercel/postgres');
 const {
-    todos,
+    tasks,
     users,
 } = require('../app/lib/db-dummy-data/data');
 const bcrypt = require('bcrypt');
@@ -39,15 +39,15 @@ async function seedUsers(client) {
     }
 }
 
-async function seedTodos(client) {
+async function seedTasks(client) {
     try {
         await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
 
-        // Create the "todos" table if it doesn't exist
-        console.log('Creating todos table...');
+        // Create the "tasks" table if it doesn't exist
+        console.log('Creating tasks table...');
 
         await client.sql`
-            CREATE TABLE IF NOT EXISTS todos (
+            CREATE TABLE IF NOT EXISTS tasks (
             id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
             name VARCHAR(255) NOT NULL,
             details VARCHAR(255) NOT NULL,
@@ -56,21 +56,21 @@ async function seedTodos(client) {
           );
         `;
 
-        console.log(`Created "todos" table`);
+        console.log(`Created "tasks" table`);
 
-        // Insert data into the "todos" table
-        const insertedTodos = await Promise.all(
-            todos.map(todo => client.sql`
-                        INSERT INTO todos (name, details, status, priority)
-                        VALUES (${todo.name}, ${todo.details}, ${todo.status}, ${todo.priority})
+        // Insert data into the "tasks" table
+        const insertedTasks = await Promise.all(
+            tasks.map(task => client.sql`
+                        INSERT INTO tasks (name, details, status, priority)
+                        VALUES (${task.name}, ${task.details}, ${task.status}, ${task.priority})
                         ON CONFLICT (id) DO NOTHING;
                     `,
                 ),
         );
 
-        console.log(`Seeded ${insertedTodos.length} todos`);
+        console.log(`Seeded ${insertedTasks.length} tasks`);
     } catch (error) {
-        console.error('Error seeding todos:', error);
+        console.error('Error seeding tasks:', error);
         throw error;
     }
 }
@@ -79,7 +79,7 @@ async function main() {
     const client = await db.connect();
 
     await seedUsers(client);
-    await seedTodos(client);
+    await seedTasks(client);
 
     await client.end();
 }

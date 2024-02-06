@@ -16,7 +16,7 @@ import Title from "@/app/ui/title";
  * I'm not going to split this one since it's the only possible use case
  * and it won't add any readability anyway.
  */
-export default function AddToDo() {
+export default function AddTask() {
   const [open, setOpen] = useState(false);
   const [priority, setPriority] = useState('normal');
   const handleOpen = () => setOpen(true);

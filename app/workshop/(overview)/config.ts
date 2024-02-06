@@ -3,9 +3,9 @@ import { CardType } from "@/app/ui/workshop/card";
 
 export const homeCards: CardType[] = [
   {
-    href: "/workshop/todos",
+    href: "/workshop/tasks",
     icon: BiListCheck,
-    title: "ToDos",
+    title: "Tasks",
     desc: "Manage your tasks ezpz!",
     subDesc: "One thing at a time...",
   },

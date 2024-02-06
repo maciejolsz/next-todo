@@ -7,7 +7,7 @@ const users = [
     },
 ];
 
-const todos = [
+const tasks = [
     {
         id: '3958dc9e-712f-4377-85e9-fec4b6a6442a',
         name: 'Read Atomic habits',
@@ -20,5 +20,5 @@ const todos = [
 
 module.exports = {
     users,
-    todos,
+    tasks,
 };
