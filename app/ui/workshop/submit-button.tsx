@@ -1,7 +1,5 @@
 import { useFormStatus } from "react-dom";
 
-import { twMerge } from "tailwind-merge";
-
 import { Button } from "@mui/material";
 
 export default function SubmitButton() {
@@ -9,7 +7,9 @@ export default function SubmitButton() {
 
   return <Button type={"submit"}
                  disabled={pending}
-                 className={twMerge("button-bw w-full disabled:bg-orange-rgb disabled:opacity-80 disabled:text-white-rgb")}>
+                 color={"secondary"}
+                 sx={{width: "100%"}}
+                 >
     {!pending ? "Submit" : "Submitting..." }
   </Button>
 }

@@ -40,7 +40,7 @@ export default function AddTask() {
   return (
     <>
       <div className={"mb-4 flex justify-start"}>
-        <Button className={"button-bw"} onClick={handleOpen}>
+        <Button onClick={handleOpen}>
           <BiAddToQueue className={"inline pb-0 pr-1"} size={"24"}/> New task
         </Button>
         { status === "success" &&
@@ -65,12 +65,12 @@ export default function AddTask() {
           <Title tier={"h2"} text={"New task:"} />
           <form action={formAction}>
             <TextField id="name" name="name" label="Task name"
-                       variant="outlined" className={"w-full my-2"}
+                       variant="outlined" sx={{my: 1, width: "100%"}}
                        required />
             <TextField id="details" name="details" label="Details"
-                       multiline minRows={2} variant="outlined" className={"w-full my-2"}
+                       multiline minRows={2} variant="outlined" sx={{my: 1, width: "100%"}}
                        required />
-            <Box className={"my-2"}>
+            <Box sx={{my: 1, width: "100%"}}>
               <FormControl fullWidth>
                 <InputLabel id="priority">Priority</InputLabel>
                 <Select labelId="priority" id="priority" name="priority"
