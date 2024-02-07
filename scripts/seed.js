@@ -10,12 +10,12 @@ async function seedUsers(client) {
         await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
         // Create the "users" table if it doesn't exist
         await client.sql`
-      CREATE TABLE IF NOT EXISTS users (
-        id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
-        name VARCHAR(255) NOT NULL,
-        email TEXT NOT NULL UNIQUE,
-        password TEXT NOT NULL
-      );
+        CREATE TABLE IF NOT EXISTS users (
+            id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+            name VARCHAR(255) NOT NULL,
+            email TEXT NOT NULL UNIQUE,
+            password TEXT NOT NULL
+        );
     `;
 
         console.log(`Created "users" table`);
@@ -52,7 +52,8 @@ async function seedTasks(client) {
             name VARCHAR(255) NOT NULL,
             details VARCHAR(255) NOT NULL,
             status VARCHAR(255) NOT NULL,
-            priority VARCHAR(255) NOT NULL
+            priority VARCHAR(255) NOT NULL,
+            created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
           );
         `;
 
@@ -61,11 +62,11 @@ async function seedTasks(client) {
         // Insert data into the "tasks" table
         const insertedTasks = await Promise.all(
             tasks.map(task => client.sql`
-                        INSERT INTO tasks (name, details, status, priority)
-                        VALUES (${task.name}, ${task.details}, ${task.status}, ${task.priority})
-                        ON CONFLICT (id) DO NOTHING;
-                    `,
-                ),
+                    INSERT INTO tasks (name, details, status, priority)
+                    VALUES (${task.name}, ${task.details}, ${task.status}, ${task.priority})
+                    ON CONFLICT (id) DO NOTHING;
+                `,
+            ),
         );
 
         console.log(`Seeded ${insertedTasks.length} tasks`);

@@ -39,19 +39,19 @@ export default function AddTask() {
 
   return (
     <>
-      <div>
+      <div className={"mb-4 flex justify-start"}>
         <Button className={"button-bw"} onClick={handleOpen}>
           <BiAddToQueue className={"inline pb-0 pr-1"} size={"24"}/> New task
         </Button>
         { status === "success" &&
-            <Alert onClose={() => {setStatus("")}} icon={<BiCheck size={24}/>} severity="success" className={"mt-2"}>
-                Here is a gentle confirmation that your action was successful.
-            </Alert>
+          <Alert onClose={() => {setStatus("")}} icon={<BiCheck size={24}/>} severity="success" className={"py-0 ml-6 flex-grow"}>
+            Here is a gentle confirmation that your action was successful.
+          </Alert>
         }
         { status === "error" &&
-            <Alert onClose={() => {setStatus("")}} icon={<BiDizzy size={24}/>} severity="error" className={"mt-2"}>
-                Here is a gentle confirmation that your action was a fucking failure.
-            </Alert>
+          <Alert onClose={() => {setStatus("")}} icon={<BiDizzy size={24}/>} severity="error" className={"py-0 ml-6 flex-grow"}>
+              Here is a gentle confirmation that your action was a fucking failure.
+          </Alert>
         }
       </div>
 

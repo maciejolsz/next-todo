@@ -4,4 +4,5 @@ export type TaskType = {
   details: string;
   status: "new" | "in-progress" | "next" | "project" | "waiting" | "done" | "trash";
   priority: "low" | "normal" | "high";
+  created_at: Date;
 };

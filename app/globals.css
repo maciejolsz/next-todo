@@ -40,7 +40,7 @@ h3 { @apply text-xl}
     /*border-2 border-black;*/
   }
   .main-content { @apply p-6 bg-white-rgb}
-  .button-bw { @apply text-white-rgb bg-black-rgb hover:bg-orange-rgb hover:border-orange-rgb }
+  .button-bw { @apply border-0 text-white-rgb bg-black-rgb hover:bg-orange-rgb hover:border-orange-rgb }
 }
 
 @layer utilities {

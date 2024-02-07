@@ -7,7 +7,7 @@ export async function fetchTasks() {
   try {
     const tasks = await sql<TaskType>`
       SELECT * FROM tasks
-      ORDER BY id
+      ORDER BY created_at DESC
     `;
 
     return tasks.rows;

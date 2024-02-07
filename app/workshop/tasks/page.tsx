@@ -7,7 +7,7 @@ export default function Page() {
   return <main>
     <Title text={"Tasks"} />
 
-    <div className={"main-content"}>
+    <div className={""}>
       <AddTask />
       <Suspense key={"tasks"} fallback={<div>Loading....</div>}>
         <TaskList/>
