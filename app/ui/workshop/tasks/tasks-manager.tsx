@@ -1,5 +1,5 @@
 import { fetchTasks } from "@/app/lib/fetch-data";
-import {TaskType} from "@/app/lib/types";
+import { TaskType } from "@/app/lib/types";
 import styles from "./styles.module.css"
 import TaskList from "@/app/ui/workshop/tasks/task-list";
 

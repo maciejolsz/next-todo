@@ -1,4 +1,4 @@
-import { Newsreader } from "next/font/google";
+import { Roboto_Slab } from "next/font/google";
 
 import { TaskType } from "@/app/lib/types";
 import Accordion from '@mui/material/Accordion';
@@ -9,11 +9,11 @@ import { BiSolidChevronDown } from "react-icons/bi";
 
 import { kebabToText } from "@/app/lib/helpers";
 
-const newsreader = Newsreader({ subsets: ['latin'] })
+const robotoSlab = Roboto_Slab({ subsets: ['latin'] })
 
 export default function TaskList({ type, tasks }: { type: string, tasks: TaskType[] }) {
   return <>
-    <div className={`w-full mb-2 text-lg capitalize ${newsreader.className}`}>
+    <div className={`w-full mb-2 text-lg capitalize ${robotoSlab.className}`}>
       {kebabToText(type)}
     </div>
 

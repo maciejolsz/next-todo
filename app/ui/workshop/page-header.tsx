@@ -2,11 +2,11 @@
 
 import Link from "next/link";
 import MyButton from "@/app/ui/my-button";
-import { Newsreader } from "next/font/google"
+import { Roboto_Slab } from "next/font/google"
 import { BiListCheck, BiCalendar, BiTimer, BiHomeAlt, BiFace, BiWrench } from "react-icons/bi";
 import { usePathname } from "next/navigation";
 
-const newsreader = Newsreader({ subsets: ['latin'] })
+const robotoSlab = Roboto_Slab({ subsets: ['latin'] })
 
 const menuItems = [
   { name: 'Home', url: '/workshop', icon: BiHomeAlt },
@@ -21,7 +21,7 @@ export default function PageHeader() {
   const iconClass = "inline pb-1";
 
   return <div className="w-full py-[40px] flex-row justify-between items-center inline-flex">
-    <div className={`text-[32px] text-orange-rgb ${newsreader.className}`}>
+    <div className={`text-[32px] text-orange-rgb ${robotoSlab.className}`}>
       <Link href={"/workshop"}>
         <BiWrench size="32" className={"inline pb-1 mr-1"}/><span className={"hover:underline"}>Workshop.</span>
       </Link>
