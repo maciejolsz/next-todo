@@ -1,5 +1,5 @@
 import type { IconType } from "react-icons";
-import { Roboto } from "next/font/google";
+import {Roboto, Roboto_Slab} from "next/font/google";
 import { twMerge } from "tailwind-merge";
 import Link from "next/link";
 
@@ -13,6 +13,7 @@ export type CardType = {
 };
 
 const roboto = Roboto({ subsets: ['latin'], weight: "400" })
+const robotoSlab = Roboto_Slab({ subsets: ['latin'] })
 
 export default function Card(props: CardType) {
   const CardIcon = props.icon;
@@ -22,7 +23,7 @@ export default function Card(props: CardType) {
         <CardIcon className={"h-full w-1/2 mx-auto text-black-rgb"}/>
       </div>
       <div className={"w-full pl-6 pb-6 pr-6 bg-white"}>
-        <div className={`text-black text-lg leading-relaxed ${roboto.className}`}>
+        <div className={`text-black text-lg leading-relaxed ${robotoSlab.className}`}>
           {props.title}
         </div>
         <p className={`text-orange-400 text-sm leading-relaxed ${roboto.className}`}>
