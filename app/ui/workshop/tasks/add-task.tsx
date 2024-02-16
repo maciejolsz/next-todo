@@ -41,7 +41,7 @@ export default function AddTask() {
     <>
       <div className={"mb-4 flex justify-start"}>
         <Button onClick={handleOpen}>
-          <BiAddToQueue className={"inline pb-0 pr-1"} size={"24"}/> New task
+          <BiAddToQueue className={"inline pb-0 pr-1"} size={"24"}/> Add task
         </Button>
         { status === "success" &&
           <Alert onClose={() => {setStatus("")}} icon={<BiCheck size={24}/>} severity="success" className={"py-0 ml-6 flex-grow"}>

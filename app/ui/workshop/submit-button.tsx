@@ -7,7 +7,7 @@ export default function SubmitButton() {
 
   return <Button type={"submit"}
                  disabled={pending}
-                 color={"secondary"}
+                 color={"primary"}
                  sx={{width: "100%"}}
                  >
     {!pending ? "Submit" : "Submitting..." }

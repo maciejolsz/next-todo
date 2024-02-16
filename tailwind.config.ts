@@ -13,6 +13,7 @@ const config: Config = {
         "gray-rgb": "rgb(var(--gray-rgb))",
         "white-rgb": "rgb(var(--white-rgb))",
         "orange-rgb": "rgb(var(--orange-rgb))",
+        "orange-rgba-bg": "rgba(var(--orange-rgb), 0.1)",
       },
     },
   },
