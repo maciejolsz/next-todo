@@ -11,7 +11,7 @@ import {
 import { SelectChangeEvent } from '@mui/material/Select';
 
 import Title from "@/app/ui/title";
-import createTask from "@/app/lib/form-actions";
+import { createTask } from "@/app/lib/form-actions";
 import SubmitButton from "@/app/ui/workshop/submit-button";
 
 /**
@@ -22,14 +22,10 @@ import SubmitButton from "@/app/ui/workshop/submit-button";
 export default function AddTask() {
   const [open, setOpen] = useState(false);
   const [status, setStatus] = useState("");
-  const [priority, setPriority] = useState('normal');
   const [formState, formAction] = useFormState(createTask, null);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const handleChange = (event: SelectChangeEvent) => {
-    setPriority(event.target.value as string);
-  };
 
   useEffect(() => {
     if (!formState?.type) return;
@@ -74,8 +70,7 @@ export default function AddTask() {
               <FormControl fullWidth>
                 <InputLabel id="priority">Priority</InputLabel>
                 <Select labelId="priority" id="priority" name="priority"
-                        value={priority} label="Priority"
-                        onChange={handleChange}
+                        defaultValue={"normal"} label="Priority"
                         required
                 >
                   <MenuItem value={"low"}>Low</MenuItem>
@@ -84,7 +79,7 @@ export default function AddTask() {
                 </Select>
               </FormControl>
             </Box>
-            <SubmitButton />
+            <SubmitButton size={"full"}/>
           </form>
         </Box>
       </Modal>

@@ -8,7 +8,7 @@ const CreateTaskFormSchema = z.object({
   name: z.string(),
   details: z.string(),
   priority: z.enum(['low', 'normal', 'high']),
-  status: z.enum(['new'])
+  status: z.enum(["new", "in-progress", "next", "project", "waiting", "done", "trash"])
 });
 
 export type State = {
@@ -22,7 +22,7 @@ export type State = {
   type?: "success" | "error";
 } | null;
 
-export default async function createTask(prevState: State, formData: FormData): Promise<State> {
+export async function createTask(prevState: State, formData: FormData): Promise<State> {
   const validatedFields = CreateTaskFormSchema.safeParse({
     name: formData.get('name'),
     details: formData.get('details'),
@@ -42,7 +42,7 @@ export default async function createTask(prevState: State, formData: FormData): 
 
     await sql`
     INSERT INTO tasks (name, details, status, priority)
-    VALUES (${name}, ${details}, ${"new"}, ${priority})
+    VALUES (${name}, ${details}, "new", ${priority})
     `;
   } catch (err) {
     return { message: 'Failed to create Task', type: "error" }
@@ -51,4 +51,38 @@ export default async function createTask(prevState: State, formData: FormData): 
   revalidatePath('/workshop/tasks');
 
   return {message: "Task created successfully", type: "success"}
+}
+
+export async function editTask(taskId: string, prevState: State, formData: FormData): Promise<State> {
+  const validatedFields = CreateTaskFormSchema.safeParse({
+    name: formData.get('name'),
+    details: formData.get('details'),
+    priority: formData.get('priority'),
+    status: formData.get('status')
+  })
+
+  if (!validatedFields.success) {
+    console.log('validatedFields', validatedFields.error.flatten().fieldErrors);
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Form is invalid.'
+    }
+  }
+
+  try {
+    const { name, details, priority, status } = validatedFields.data;
+
+    await sql`
+      UPDATE tasks
+      SET name = ${name}, details = ${details}, status = ${status}, priority = ${priority}
+      WHERE id = ${taskId}
+    `
+  } catch (err) {
+    console.log('err', err);
+    return { message: 'Failed to update Task', type: "error" }
+  }
+
+  revalidatePath('/workshop/tasks');
+
+  return {message: "Task updated successfully", type: "success"}
 }
