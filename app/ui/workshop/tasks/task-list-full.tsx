@@ -14,22 +14,21 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import Typography from "@mui/material/Typography";
 import AccordionDetails from "@mui/material/AccordionDetails";
-import {
-  Box, Button, FormControl, InputLabel, Menu, MenuItem, Modal, Select, Snackbar, TextField
-} from "@mui/material";
+import { Menu, MenuItem, Snackbar} from "@mui/material";
 
-import { TaskStatusType, TaskType } from "@/app/lib/types";
+import {HandleToggle, TaskStatusType, TaskType} from "@/app/lib/types";
 import { deleteTask, editTask } from "@/app/lib/form-actions";
 import { kebabToText } from "@/app/lib/helpers";
-import Title from "@/app/ui/title";
-import SubmitButton from "@/app/ui/workshop/submit-button";
+import TaskModal from "@/app/ui/workshop/tasks/task-modal";
 
-const robotoSlab = Roboto_Slab({ subsets: ['latin'] })
+const robotoSlab = Roboto_Slab({ subsets: ['latin'] });
+
 const PriorityIcon = {
   high: <BiAlarmExclamation className={"inline pb-0 pl-1 text-orange-rgb"} size={"22"}/>,
   normal: <BiAlarm className={"inline pb-0 pl-1 text-black-rgb"} size={"22"}/>,
   low: <BiAlarmSnooze className={"inline pb-0 pl-1 text-gray-400"} size={"22"}/>
 };
+
 export default function TaskListFull({ type, tasks }: { type: TaskStatusType, tasks: TaskType[] }) {
   // contains recently updated formState - edit/delete
   const [status, setStatus] = useState("");
@@ -41,9 +40,9 @@ export default function TaskListFull({ type, tasks }: { type: TaskStatusType, ta
   const [openModal, setOpenModal] = useState(false);
   const [openSnack, setOpenSnack] = useState(false);
 
-  const deleteTaskWithId = deleteTask.bind(null, selectedTask.id);
+  const deleteTaskWithId = deleteTask.bind(null, selectedTask.id!);
   const [deleteFormState, deleteFormAction] = useFormState(deleteTaskWithId, null);
-  const editTaskWithId = editTask.bind(null, selectedTask.id);
+  const editTaskWithId = editTask.bind(null, selectedTask.id!);
   const [editFormState, editFormAction] = useFormState(editTaskWithId, null);
 
   // closure used for open/close modal, snack and menu
@@ -52,11 +51,11 @@ export default function TaskListFull({ type, tasks }: { type: TaskStatusType, ta
     close: () => toggleFunction(false)
   });
 
-  const handleModalToggle = createHandleToggle(setOpenModal);
-  const handleSnackToggle = createHandleToggle(setOpenSnack);
-  const handleMenuToggle = createHandleToggle(setOpenMenu);
+  const handleModalToggle: HandleToggle = createHandleToggle(setOpenModal);
+  const handleSnackToggle: HandleToggle = createHandleToggle(setOpenSnack);
+  const handleMenuToggle: HandleToggle = createHandleToggle(setOpenMenu);
 
-  // todo: refactor this!
+  // todo: use hook for that
   useEffect(() => {
     if (!editFormState?.type) return;
     setStatus(editFormState.type);
@@ -69,7 +68,6 @@ export default function TaskListFull({ type, tasks }: { type: TaskStatusType, ta
     setStatus(deleteFormState.type);
     handleModalToggle.close();
     handleSnackToggle.open();
-    //
   }, [deleteFormState]);
 
   return <>
@@ -92,7 +90,6 @@ export default function TaskListFull({ type, tasks }: { type: TaskStatusType, ta
                                            setSelectedTask(task);
                                            setAnchorEl(e.currentTarget);
                                            handleMenuToggle.open();
-                                           // handleOpenMenu();
                                          }}/>
                   <span className={"capitalize"}>{task.name}</span>
                 </Typography>
@@ -111,56 +108,28 @@ export default function TaskListFull({ type, tasks }: { type: TaskStatusType, ta
       })}
     </ul>
 
-    {/* edit modal */}
-    {/* todo: once it works extract form to separate component, pass form action and (optional) task data */}
-    <Modal
-      open={openModal}
-      onClose={handleModalToggle.close}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-    >
-      <Box className={"bg-white-rgb absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/4 shadow-2xl p-4"}>
-        <Title tier={"h2"} text={"Edit task:"}/>
-        <form action={editFormAction}>
-          <TextField id="name" name="name" label="Task name" defaultValue={selectedTask?.name}
-                     variant="outlined" sx={{my: 1, width: "100%"}}
-                     required/>
-          <TextField id="details" name="details" label="Details" defaultValue={selectedTask?.details}
-                     multiline minRows={2} variant="outlined" sx={{my: 1, width: "100%"}}
-                     required/>
-          <Box sx={{my: 1, width: "100%"}}>
-            <FormControl fullWidth>
-              <InputLabel id="priority">Priority</InputLabel>
-              <Select labelId="priority" id="priority" name="priority"
-                      defaultValue={selectedTask?.priority} label="Priority"
-                      required
-              >
-                <MenuItem value={"low"}>Low</MenuItem>
-                <MenuItem value={"normal"}>Normal</MenuItem>
-                <MenuItem value={"high"}>High</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
-          <input type={"hidden"} name={"status"} value={selectedTask.status}/>
-
-          <div className={"flex justify-between"}>
-            <Button color={"secondary"} onClick={handleModalToggle.close}>Close</Button>
-            <SubmitButton size={"sm"}/>
-          </div>
-        </form>
-      </Box>
-    </Modal>
+    <TaskModal selectedTask={selectedTask}
+               openModal={openModal}
+               handleModalToggle={handleModalToggle}
+               formAction={editFormAction} />
 
     <div>
-      <Snackbar open={openSnack} autoHideDuration={6000} onClose={handleSnackToggle.close}
+      <Snackbar open={openSnack}
+                autoHideDuration={6000}
+                onClose={handleSnackToggle.close}
                 message={status === "success" ? "SUCCESS" : "FAILURE"}/>
     </div>
 
-    <Menu id="basic-menu" anchorEl={anchorEl} open={openMenu} onClose={handleMenuToggle.close}>
+    <Menu id="basic-menu"
+          anchorEl={anchorEl}
+          open={openMenu}
+          onClose={handleMenuToggle.close}>
       <MenuItem onClick={() => {
         handleModalToggle.open();
         handleMenuToggle.close();
-      }}>Edit</MenuItem>
+      }}>
+        Edit
+      </MenuItem>
       <MenuItem onClick={handleMenuToggle.close}>
         <form action={deleteFormAction}>
           <button>Delete</button>
