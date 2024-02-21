@@ -38,13 +38,14 @@ export async function createTask(prevState: State, formData: FormData): Promise<
   }
 
   try {
-    const { name, details, priority } = validatedFields.data;
+    const { name, details, priority, status } = validatedFields.data;
 
     await sql`
     INSERT INTO tasks (name, details, status, priority)
-    VALUES (${name}, ${details}, "new", ${priority})
+    VALUES (${name}, ${details}, ${status}, ${priority})
     `;
   } catch (err) {
+    console.log('err:', err)
     return { message: 'Failed to create Task', type: "error" }
   }
 
@@ -76,6 +77,21 @@ export async function editTask(taskId: string, prevState: State, formData: FormD
       UPDATE tasks
       SET name = ${name}, details = ${details}, status = ${status}, priority = ${priority}
       WHERE id = ${taskId}
+    `
+  } catch (err) {
+    console.log('err', err);
+    return { message: 'Failed to update Task', type: "error" }
+  }
+
+  revalidatePath('/workshop/tasks');
+
+  return {message: "Task updated successfully", type: "success"}
+}
+
+export async function deleteTask(taskId: string): Promise<State> {
+  try {
+    await sql`
+      DELETE FROM tasks WHERE id = ${taskId}
     `
   } catch (err) {
     console.log('err', err);

@@ -1,9 +1,10 @@
 import { fetchTasks } from "@/app/lib/fetch-data";
-import { TaskType } from "@/app/lib/types";
-import styles from "./styles.module.css"
+import { TaskStatusType, TaskType } from "@/app/lib/types";
 import TaskList from "@/app/ui/workshop/tasks/task-list";
 
-export const taskTypes = ["new", "next", "on-it", "project", "blocked", "done"];
+import styles from "./styles.module.css"
+
+export const taskTypes: TaskStatusType[] = ["new", "next", "on-it", "project", "blocked", "done"];
 
 export default async function TasksManager() {
   const tasks: TaskType[] = await fetchTasks();

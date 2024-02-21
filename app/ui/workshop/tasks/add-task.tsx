@@ -2,13 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { useFormState } from 'react-dom';
-import { BiAddToQueue, BiCheck, BiDizzy } from "react-icons/bi";
+import { BiAddToQueue } from "react-icons/bi";
 
 import {
   Box, Button, Modal, TextField,
-  InputLabel, MenuItem, FormControl, Select, Alert
+  InputLabel, MenuItem, FormControl, Select, Snackbar
 } from '@mui/material';
-import { SelectChangeEvent } from '@mui/material/Select';
 
 import Title from "@/app/ui/title";
 import { createTask } from "@/app/lib/form-actions";
@@ -20,40 +19,42 @@ import SubmitButton from "@/app/ui/workshop/submit-button";
  * and it won't add any readability anyway.
  */
 export default function AddTask() {
-  const [open, setOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const [openSnack, setOpenSnack] = useState(false);
   const [status, setStatus] = useState("");
   const [formState, formAction] = useFormState(createTask, null);
 
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleOpenModal = () => setOpenModal(true);
+  const handleCloseModal = () => setOpenModal(false);
+  const handleOpenSnack = () => setOpenSnack(true);
+  const handleCloseSnack = () => setOpenSnack(false);
 
   useEffect(() => {
     if (!formState?.type) return;
-    handleClose();
+    handleCloseModal();
     setStatus(formState.type);
+    handleOpenSnack();
   }, [formState]);
 
   return (
     <>
       <div className={"mb-4 flex justify-start"}>
-        <Button onClick={handleOpen}>
+        <Button onClick={handleOpenModal}>
           <BiAddToQueue className={"inline pb-0 pr-1"} size={"24"}/> Add task
         </Button>
-        { status === "success" &&
-          <Alert onClose={() => {setStatus("")}} icon={<BiCheck size={24}/>} severity="success" className={"py-0 ml-6 flex-grow"}>
-            Here is a gentle confirmation that your action was successful.
-          </Alert>
-        }
-        { status === "error" &&
-          <Alert onClose={() => {setStatus("")}} icon={<BiDizzy size={24}/>} severity="error" className={"py-0 ml-6 flex-grow"}>
-              Here is a gentle confirmation that your action was a fucking failure.
-          </Alert>
-        }
+        <div>
+          <Snackbar
+            open={openSnack}
+            autoHideDuration={6000}
+            onClose={handleCloseSnack}
+            message={status === "success" ? "SUCCESS" : "FAILURE"}
+          />
+        </div>
       </div>
 
       <Modal
-        open={open}
-        onClose={handleClose}
+        open={openModal}
+        onClose={handleCloseModal}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
