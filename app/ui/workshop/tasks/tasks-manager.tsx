@@ -10,15 +10,15 @@ export default async function TasksManager() {
   const tasks: TaskType[] = await fetchTasks();
 
   return <main>
-    <div className={styles.tasksGrid}>
-      {taskTypes.map((type) => {
-        const doubleClass = ["new", "done"].includes(type) ? styles.doubleRow : "";
-        const doneClass = type === "done" ? styles.doneCol : "";
+      <div className={styles.tasksGrid}>
+        {taskTypes.map((type) => {
+          const doubleClass = ["new", "done"].includes(type) ? styles.doubleRow : "";
+          const doneClass = type === "done" ? styles.doneCol : "";
 
-        return <div key={type} className={`${styles.tasksSection} ${doubleClass} ${doneClass}`}>
-          <TaskList type={type} tasks={tasks.filter((task) => task.status === type)}/>
-        </div>
-      })}
-    </div>
+          return <div key={type} className={`${styles.tasksSection} ${doubleClass} ${doneClass}`}>
+            <TaskList type={type} tasks={tasks.filter((task) => task.status === type)}/>
+          </div>
+        })}
+      </div>
   </main>
 }

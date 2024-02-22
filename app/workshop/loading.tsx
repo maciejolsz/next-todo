@@ -1,3 +1,3 @@
 export default function Loading() {
-  return <>Loading fallback.</>
+  return <div className={"text-center animate-bounce"}>Loading...</div>
 }
