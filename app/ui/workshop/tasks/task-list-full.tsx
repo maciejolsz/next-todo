@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useFormState } from "react-dom";
 import { Roboto_Slab } from "next/font/google";
 import {
@@ -16,10 +16,11 @@ import Typography from "@mui/material/Typography";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import { Menu, MenuItem, Snackbar} from "@mui/material";
 
-import {HandleToggle, TaskStatusType, TaskType} from "@/app/lib/types";
+import TaskModal from "@/app/ui/workshop/tasks/task-modal";
+import { HandleToggle, TaskStatusType, TaskType } from "@/app/lib/types";
 import { deleteTask, editTask } from "@/app/lib/form-actions";
 import { kebabToText } from "@/app/lib/helpers";
-import TaskModal from "@/app/ui/workshop/tasks/task-modal";
+import {useHandleTaskFormModal} from "@/app/lib/hooks";
 
 const robotoSlab = Roboto_Slab({ subsets: ['latin'] });
 
@@ -55,20 +56,15 @@ export default function TaskListFull({ type, tasks }: { type: TaskStatusType, ta
   const handleSnackToggle: HandleToggle = createHandleToggle(setOpenSnack);
   const handleMenuToggle: HandleToggle = createHandleToggle(setOpenMenu);
 
-  // todo: use hook for that
-  useEffect(() => {
-    if (!editFormState?.type) return;
-    setStatus(editFormState.type);
-    handleModalToggle.close();
-    handleSnackToggle.open();
-  }, [editFormState]);
+  // close modal, display snackbar based on form status. dependency: formState
+  const commonFormProps = {
+    closeModal: handleModalToggle.close,
+    openSnack: handleSnackToggle.open,
+    setStatus
+  };
 
-  useEffect(() => {
-    if (!deleteFormState?.type) return;
-    setStatus(deleteFormState.type);
-    handleModalToggle.close();
-    handleSnackToggle.open();
-  }, [deleteFormState]);
+  useHandleTaskFormModal({formState: editFormState, ...commonFormProps});
+  useHandleTaskFormModal({formState: deleteFormState, ...commonFormProps});
 
   return <>
     <div className={`w-full mb-2 text-lg capitalize ${robotoSlab.className}`}>

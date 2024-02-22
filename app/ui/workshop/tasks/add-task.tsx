@@ -1,14 +1,16 @@
 "use client"
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useFormState } from 'react-dom';
 import { BiAddToQueue } from "react-icons/bi";
 
 import { Snackbar, Button } from '@mui/material';
 
-import { createTask } from "@/app/lib/form-actions";
 import TaskModal from "@/app/ui/workshop/tasks/task-modal";
-import {HandleToggle} from "@/app/lib/types";
+import { createTask } from "@/app/lib/form-actions";
+import { HandleToggle } from "@/app/lib/types";
+import { useHandleTaskFormModal } from "@/app/lib/hooks";
+
 
 /**
  * A button that opens modal with new task form.
@@ -29,13 +31,13 @@ export default function AddTask() {
   const handleModalToggle: HandleToggle = createHandleToggle(setOpenModal);
   const handleSnackToggle: HandleToggle = createHandleToggle(setOpenSnack);
 
-  // todo: use hook for that
-  useEffect(() => {
-    if (!createFormState?.type) return;
-    handleModalToggle.close();
-    setStatus(createFormState.type);
-    handleSnackToggle.open();
-  }, [createFormState]);
+  // close modal, display snackbar based on form status. dependency: formState
+  useHandleTaskFormModal({
+    formState: createFormState,
+    closeModal: handleModalToggle.close,
+    openSnack: handleSnackToggle.open,
+    setStatus
+  });
 
   return (
     <>

@@ -11,7 +11,7 @@ const CreateTaskFormSchema = z.object({
   status: z.enum(["new", "in-progress", "next", "project", "waiting", "done", "trash"])
 });
 
-export type State = {
+export type TaskState = {
   errors?: {
     name?: string[];
     details?: string[];
@@ -22,7 +22,7 @@ export type State = {
   type?: "success" | "error";
 } | null;
 
-export async function createTask(prevState: State, formData: FormData): Promise<State> {
+export async function createTask(prevState: TaskState, formData: FormData): Promise<TaskState> {
   const validatedFields = CreateTaskFormSchema.safeParse({
     name: formData.get('name'),
     details: formData.get('details'),
@@ -54,7 +54,7 @@ export async function createTask(prevState: State, formData: FormData): Promise<
   return {message: "Task created successfully", type: "success"}
 }
 
-export async function editTask(taskId: string, prevState: State, formData: FormData): Promise<State> {
+export async function editTask(taskId: string, prevState: TaskState, formData: FormData): Promise<TaskState> {
   const validatedFields = CreateTaskFormSchema.safeParse({
     name: formData.get('name'),
     details: formData.get('details'),
@@ -88,7 +88,7 @@ export async function editTask(taskId: string, prevState: State, formData: FormD
   return {message: "Task updated successfully", type: "success"}
 }
 
-export async function deleteTask(taskId: string): Promise<State> {
+export async function deleteTask(taskId: string): Promise<TaskState> {
   try {
     await sql`
       DELETE FROM tasks WHERE id = ${taskId}
