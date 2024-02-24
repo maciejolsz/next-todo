@@ -6,8 +6,7 @@ export default function TaskListSection({type, tasks}: {type: TaskStatusType, ta
   const doubleClass = ["new", "done"].includes(type) ? styles.doubleRow : "";
   const doneClass = type === "done" ? styles.doneCol : "";
 
-  return <div key={type}
-         className={`${styles.tasksSection} ${doubleClass} ${doneClass}`}>
+  return <div key={type} className={`${styles.tasksSection} ${doubleClass} ${doneClass}`}>
       <TaskList type={type} tasks={tasks.filter((task) => task.status === type)}/>
     </div>;
 }

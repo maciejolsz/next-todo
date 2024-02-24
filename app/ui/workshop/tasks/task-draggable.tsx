@@ -24,18 +24,10 @@ export default function TaskDraggable({task, setSelectedTask, setAnchorEl, openM
     id: task.id!,
   });
 
-  const transformStyle = transform ? {
-    transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
-  } : undefined;
-  const draggingStyle = isDragging ? {
-    opacity: 0.5,
-  } : {opacity: 1};
-  const style = {
-    ...transformStyle,
-    ...draggingStyle
-  }
+  const transformStyle = transform ? { transform: `translate3d(${transform.x}px, ${transform.y}px, 0)` } : undefined;
+  const draggingStyle = isDragging ? { opacity: 0.8 } : { opacity: 1 };
 
-  return <div key={task.id} className={"my-4"} ref={setNodeRef} style={style}>
+  return <div key={task.id} className={"my-4"} ref={setNodeRef} style={{...transformStyle, ...draggingStyle}}>
     <Accordion elevation={2} disableGutters={true}>
       <div className={"hover:bg-gray-rgb"}>
         <AccordionSummary
