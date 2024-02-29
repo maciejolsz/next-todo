@@ -15,6 +15,8 @@ import { changeTaskStatus } from "@/app/lib/form-actions";
 export const taskTypes: TaskStatusType[] = ["new", "next", "on-it", "project", "blocked", "done"];
 
 export default function TasksManagerDnd({tasks}: {tasks: TaskType[]}) {
+  const [activeId, setActiveId] = useState<UniqueIdentifier>();
+
   const [optimisticTasks, moveOptimisticTask] = useOptimistic(
     tasks,
     (state: TaskType[], {newStatus, activeId}) => {
@@ -24,7 +26,6 @@ export default function TasksManagerDnd({tasks}: {tasks: TaskType[]}) {
       return [...state];
     }
   );
-  const [activeId, setActiveId] = useState<UniqueIdentifier>();
 
   const handleDragEnd = (event: DragEndEvent) => {
     const newStatus = event.over?.id as TaskStatusType;

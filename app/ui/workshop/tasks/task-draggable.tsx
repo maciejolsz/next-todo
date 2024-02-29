@@ -33,18 +33,19 @@ export default function TaskDraggable({task, setSelectedTask, setAnchorEl, openM
         <AccordionSummary
                           aria-controls="panel1-content"
                           id="panel1-header">
-          <div className={"w-full"}>
-
-            <span {...listeners} {...attributes}><RxDragHandleDots1 className={"inline text-gray-400 pb-1"} size={20}/></span>
-            {PriorityIcon[task.priority]}
-            <span className={"capitalize"}>{task.name}</span>
-            <BiDotsVerticalRounded className={"mt-1 float-right rounded-full hover:bg-gray-300"} size={18}
+          <div className={"w-full flex justify-between"}>
+            <div {...listeners} {...attributes}>
+              <RxDragHandleDots1 className={"inline text-gray-400 pb-1"} size={20}/>
+            </div>
+            <div>{PriorityIcon[task.priority]}</div>
+            <div className={"capitalize grow"}>{task.name}</div>
+            <BiDotsVerticalRounded className={"block mt-1 float-right rounded-full hover:bg-gray-300"} size={18}
                                onClick={(e) => {
-                                 e.stopPropagation();
-                                 setSelectedTask(task);
-                                 setAnchorEl(e.currentTarget);
+                                 e.stopPropagation(); // mute dragging
+                                 setSelectedTask(task); // to handle actions properly
+                                 setAnchorEl(e.currentTarget); // selected icon becomes anhor for <Menu />
                                  openMenu();
-                               }}/>
+                               }} />
           </div>
 
         </AccordionSummary>
