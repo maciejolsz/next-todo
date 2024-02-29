@@ -1,36 +1,22 @@
-"use client"
-
 import { useState } from "react";
 import { useFormState } from "react-dom";
 import { Roboto_Slab } from "next/font/google";
-import {
-  BiAlarm,
-  BiAlarmExclamation,
-  BiAlarmSnooze, BiDotsVerticalRounded,
-  BiSolidChevronDown
-} from "react-icons/bi";
 
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import Typography from "@mui/material/Typography";
-import AccordionDetails from "@mui/material/AccordionDetails";
 import { Menu, MenuItem, Snackbar} from "@mui/material";
 
 import TaskModal from "@/app/ui/workshop/tasks/task-modal";
 import { HandleToggle, TaskStatusType, TaskType } from "@/app/lib/types";
 import { deleteTask, editTask } from "@/app/lib/form-actions";
 import { kebabToText } from "@/app/lib/helpers";
-import {useHandleTaskFormModal} from "@/app/lib/hooks";
+import { useHandleTaskFormModal } from "@/app/lib/hooks";
+import TaskDraggable from "@/app/ui/workshop/tasks/task-draggable";
 
 const robotoSlab = Roboto_Slab({ subsets: ['latin'] });
 
-const PriorityIcon = {
-  high: <BiAlarmExclamation className={"inline pb-0 pl-1 text-orange-rgb"} size={"22"}/>,
-  normal: <BiAlarm className={"inline pb-0 pl-1 text-black-rgb"} size={"22"}/>,
-  low: <BiAlarmSnooze className={"inline pb-0 pl-1 text-gray-400"} size={"22"}/>
-};
+type TaskListProps = { type: TaskStatusType, tasks: TaskType[], isOver: boolean, customRef: (element: HTMLElement | null) => void; }
 
-export default function TaskListFull({ type, tasks }: { type: TaskStatusType, tasks: TaskType[] }) {
+export default function TaskListFull({ type, tasks, isOver, customRef }: TaskListProps) {
+  const isOverClass = isOver ? "opacity-50" : undefined;
   // contains recently updated formState - edit/delete
   const [status, setStatus] = useState("");
   // set on task options click, stores task data
@@ -66,41 +52,17 @@ export default function TaskListFull({ type, tasks }: { type: TaskStatusType, ta
   useHandleTaskFormModal({formState: editFormState, ...commonFormProps});
   useHandleTaskFormModal({formState: deleteFormState, ...commonFormProps});
 
-  return <>
+  return <div ref={customRef} className={`w-full h-full ${isOverClass}`}>
     <div className={`w-full mb-2 text-lg capitalize ${robotoSlab.className}`}>
       {kebabToText(type)}
     </div>
 
     <ul>
       {tasks.map((task) => {
-        return <div key={task.id} className={"my-4"}>
-          <Accordion elevation={2} disableGutters={true}>
-            <div className={"hover:bg-gray-rgb"}>
-              <AccordionSummary expandIcon={<BiSolidChevronDown/>}
-                                aria-controls="panel1-content"
-                                id="panel1-header">
-                <Typography>
-                  <BiDotsVerticalRounded className={"inline pb-0 mr-2 rounded-full hover:bg-gray-200"} size={18}
-                                         onClick={(e) => {
-                                           e.stopPropagation();
-                                           setSelectedTask(task);
-                                           setAnchorEl(e.currentTarget);
-                                           handleMenuToggle.open();
-                                         }}/>
-                  <span className={"capitalize"}>{task.name}</span>
-                </Typography>
-                {PriorityIcon[task.priority]}
-              </AccordionSummary>
-            </div>
-
-            <hr/>
-            <AccordionDetails>
-              <Typography variant={"body2"}>
-                {task.details}
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
-        </div>
+        return <TaskDraggable task={task} key={task.id}
+                     setSelectedTask={setSelectedTask}
+                     setAnchorEl={setAnchorEl}
+                     openMenu={handleMenuToggle.open} />
       })}
     </ul>
 
@@ -132,5 +94,5 @@ export default function TaskListFull({ type, tasks }: { type: TaskStatusType, ta
         </form>
       </MenuItem>
     </Menu>
-  </>
+  </div>
 }

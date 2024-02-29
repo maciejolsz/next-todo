@@ -1,8 +1,10 @@
 'use server'
 
-import {z} from "zod";
-import {sql} from "@vercel/postgres";
-import {revalidatePath} from "next/cache";
+import { z } from "zod";
+import { sql } from "@vercel/postgres";
+import { revalidatePath } from "next/cache";
+import { UniqueIdentifier } from "@dnd-kit/core";
+import { TaskStatusType } from "@/app/lib/types";
 
 const CreateTaskFormSchema = z.object({
   name: z.string(),
@@ -96,6 +98,23 @@ export async function deleteTask(taskId: string): Promise<TaskState> {
   } catch (err) {
     console.log('err', err);
     return { message: 'Failed to update Task', type: "error" }
+  }
+
+  revalidatePath('/workshop/tasks');
+
+  return {message: "Task updated successfully", type: "success"}
+}
+
+export async function changeTaskStatus(taskId: UniqueIdentifier, newStatus: TaskStatusType) {
+  try {
+    await sql`
+      UPDATE tasks
+      SET status = ${newStatus}
+      WHERE id = ${taskId}
+    `
+  } catch (err) {
+    console.log('err', err);
+    return { message: 'Failed to update Task status', type: "error" }
   }
 
   revalidatePath('/workshop/tasks');
