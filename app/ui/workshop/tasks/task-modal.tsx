@@ -67,7 +67,7 @@ export default function TaskModal({selectedTask, openModal, handleModalToggle, f
                   onClick={handleModalToggle.close}>
             Close
           </Button>
-          <SubmitButton size={"sm"}/>
+          <SubmitButton size={"mini"}/>
         </div>
       </form>
     </Box>

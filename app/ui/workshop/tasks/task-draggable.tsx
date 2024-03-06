@@ -54,7 +54,8 @@ export default function TaskDraggable({task, setSelectedTask, setAnchorEl, openM
       <hr/>
       <AccordionDetails>
         <Typography variant={"body2"}>
-          {task.details}
+          ID: {task.id} <br />
+          Details: {task.details}
         </Typography>
       </AccordionDetails>
     </Accordion>

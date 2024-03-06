@@ -15,4 +15,7 @@
 .doneCol {
     @apply col-start-4
 }
+.onItClass {
+    @apply bg-orange-rgb text-white-rgb
+}
 

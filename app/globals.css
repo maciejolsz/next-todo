@@ -41,6 +41,7 @@ h3 { @apply text-xl}
   }
   .main-content { @apply p-6 bg-white-rgb}
   .button-bw { @apply border-0 text-white-rgb bg-black-rgb hover:bg-orange-rgb hover:border-orange-rgb }
+  .calendar-container { @apply h-[700px] }
 }
 
 @layer utilities {
