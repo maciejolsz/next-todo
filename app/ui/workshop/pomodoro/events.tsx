@@ -8,7 +8,12 @@ import {Button} from "@mui/material";
 
 import {GoogleCalEventType} from "@/app/lib/types";
 
-export default function Events({apiKey, clientId}: {apiKey: string, clientId: string}) {
+type EventsProps = {
+  apiKey: string;
+  clientId: string;
+  calendarIds: string[];
+}
+export default function Events({apiKey, clientId, calendarIds}: EventsProps) {
   const [authLabel, setAuthLabel] = useState("Authorize to load events");
   const [fetchedEvents, setFetchedEvents] = useState([]);
 
@@ -70,7 +75,8 @@ export default function Events({apiKey, clientId}: {apiKey: string, clientId: st
     const now = new Date();
     try {
       const request = {
-        'calendarId': 'maciejolsz@gmail.com',
+        // if it stays like that (both cals in use) - combine those
+        'calendarId': calendarIds[0],
         'timeMin': (now).toISOString(),
         'timeMax': (new Date(now.getTime() + 14*24*60*60*1000)).toISOString(),
         'showDeleted': false,
@@ -79,7 +85,7 @@ export default function Events({apiKey, clientId}: {apiKey: string, clientId: st
         'orderBy': 'startTime',
       };
       const requestAS = {
-        'calendarId': 'maciej.olszewski@amsterdamstandard.com',
+        'calendarId': calendarIds[1],
         'timeMin': (now).toISOString(),
         'timeMax': (new Date(now.getTime() + 14*24*60*60*1000)).toISOString(),
         'showDeleted': false,

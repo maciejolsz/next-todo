@@ -7,11 +7,13 @@ import Events from "@/app/ui/workshop/pomodoro/events";
 import PomodoroSettings from "@/app/ui/workshop/pomodoro/pomodoro-settings";
 import { grabGoogleCreds } from "@/app/lib/helpers";
 
-// todo: on click dim everything, display task name, details, timer and "play/pause/stop" button.
+// todo: on "start" click dim everything, display task name, details, timer and "play/pause/stop" button.
 export default async function Page() {
+  const calendarIds = [process.env.CALENDAR_ID0 || "", process.env.CALENDAR_ID1 || ""]
   const {apiKey, clientId} = grabGoogleCreds();
-  const tasks = await fetchTasks();
-  const onItTasks: TaskType[] = tasks.filter(task => task.status === 'on-it');
+  const onItTasks: TaskType[] = await fetchTasks().then((tasks) => {
+    return tasks.filter(task => task.status === 'on-it');
+  });
   const themes = [
     {id: 1, name: "Hip-Hop"},
     {id: 2, name: "Piano"},
@@ -27,9 +29,8 @@ export default async function Page() {
 
       <div className={"main-content w-1/2"}>
         <Title text={"Coming events"} tier={"h3"}/>
-        <Events apiKey={apiKey} clientId={clientId}/>
+        <Events apiKey={apiKey} clientId={clientId} calendarIds={calendarIds}/>
       </div>
-
     </div>
   </main>
 }
