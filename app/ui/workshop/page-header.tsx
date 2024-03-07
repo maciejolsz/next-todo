@@ -10,8 +10,8 @@ const robotoSlab = Roboto_Slab({ subsets: ['latin'] })
 
 const menuItems = [
   { name: 'Home', url: '/workshop', icon: BiHomeAlt },
-  { name: 'Tasks', url: '/workshop/tasks', icon: BiListCheck,},
   { name: 'Calendar', url: '/workshop/calendar', icon: BiCalendar },
+  { name: 'Tasks', url: '/workshop/tasks', icon: BiListCheck,},
   { name: 'Pomodoro', url: '/workshop/pomodoro', icon: BiTimer },
 ];
 
