@@ -112,7 +112,7 @@ export default function Events({apiKey, clientId}: {apiKey: string, clientId: st
       { fetchedEvents &&
         fetchedEvents.map((event: GoogleCalEventType) => {
           const date = new Date(event.start.dateTime as string);
-          return <Link href={event.hangoutLink} key={event.id}>
+          return <Link href={event.hangoutLink || "#"} key={event.id}>
             <div className={`calendar-event-single border-orange-rgb text-orange-rgb hover:bg-orange-rgb hover:text-white-rgb`}>
               {`${date.toLocaleDateString()} ${date.toLocaleTimeString()}`}<br />
               {event.summary}<br />
