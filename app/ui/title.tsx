@@ -6,13 +6,12 @@ const robotoSlab = Roboto_Slab({ subsets: ['latin'] })
 type HeaderProps = {
   tier?: "h1" | "h2" | "h3";
   text: string;
-  align?: "left" | "center" | "right";
 };
 
-export default function Title({tier = "h1", text, align}: HeaderProps) {
+export default function Title({tier = "h1", text}: HeaderProps) {
   return createElement(
     tier,
-    { className: `${robotoSlab.className} text-${align}` },
+    { className: `${robotoSlab.className}` },
     text
   );
 }

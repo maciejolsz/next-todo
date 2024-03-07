@@ -1,30 +1,22 @@
 "use client"
 
+import { useState } from "react";
+import Link from "next/link";
 import Script from "next/script";
-import {useLayoutEffect, useState} from "react";
+
 import {Button} from "@mui/material";
 
-type EventType = {
-  summary: string,
-  creator: { email: string }
-};
+import {GoogleCalEventType} from "@/app/lib/types";
 
 export default function Events({apiKey, clientId}: {apiKey: string, clientId: string}) {
-  const CLIENT_ID = clientId;
-  const API_KEY = apiKey;
-
-  // Discovery doc URL for APIs used by the quickstart
-  const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest';
-
-  // Authorization scopes required by the API; multiple scopes can be
-  // included, separated by spaces.
-  const SCOPES = 'https://www.googleapis.com/auth/calendar';
+  const [authLabel, setAuthLabel] = useState("Authorize to load events");
+  const [fetchedEvents, setFetchedEvents] = useState([]);
 
   let tokenClient: any;
-  let gapiInited = false;
-  let gisInited = false;
-
-  const [authLabel, setAuthLabel] = useState("Authorize");
+  const CLIENT_ID = clientId;
+  const API_KEY = apiKey;
+  const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest';
+  const SCOPES = 'https://www.googleapis.com/auth/calendar';
 
   function handleOnApiLoad() {
     // @ts-ignore
@@ -37,23 +29,18 @@ export default function Events({apiKey, clientId}: {apiKey: string, clientId: st
       apiKey: API_KEY,
       discoveryDocs: [DISCOVERY_DOC],
     });
-    gapiInited = true;
-    maybeEnableButtons();
   }
+
   function handleOnGsiLoad() {
     tokenClient = initTokenClient();
-    gisInited = true;
-    maybeEnableButtons();
   }
 
   function handleAuthClick() {
     if (!tokenClient) tokenClient = initTokenClient();
     tokenClient.callback = async (resp: any) => {
-      console.log('handleAuthClick response', resp)
       if (resp.error !== undefined) {
         throw (resp);
       }
-      document.getElementById('signout_button')!.style.visibility = 'visible';
       setAuthLabel("Refresh");
       await listUpcomingEvents();
     };
@@ -69,21 +56,6 @@ export default function Events({apiKey, clientId}: {apiKey: string, clientId: st
     }
   }
 
-  /**
-   *  Sign out the user upon button click.
-   */
-  function handleSignoutClick() {
-    // @ts-ignore
-    const token = gapi.client.getToken();
-    if (token !== null) {
-      // @ts-ignore
-      google.accounts.oauth2.revoke(token.access_token);
-      // @ts-ignore
-      gapi.client.setToken('');
-      setAuthLabel("Authorize");
-      document.getElementById('signout_button')!.style.visibility = 'hidden';
-    }
-  }
   function initTokenClient() {
     // @ts-ignore
     return google.accounts.oauth2.initTokenClient({
@@ -91,11 +63,7 @@ export default function Events({apiKey, clientId}: {apiKey: string, clientId: st
       scope: SCOPES,
     });
   }
-  function maybeEnableButtons() {
-    if (gapiInited && gisInited) {
-      document.getElementById('signout_button')!.style.visibility = 'hidden';
-    }
-  }
+
   async function listUpcomingEvents(): Promise<any> {
     let response;
     let responseAS;
@@ -107,7 +75,7 @@ export default function Events({apiKey, clientId}: {apiKey: string, clientId: st
         'timeMax': (new Date(now.getTime() + 14*24*60*60*1000)).toISOString(),
         'showDeleted': false,
         'singleEvents': true,
-        'maxResults': 10,
+        'maxResults': 1,
         'orderBy': 'startTime',
       };
       const requestAS = {
@@ -116,7 +84,7 @@ export default function Events({apiKey, clientId}: {apiKey: string, clientId: st
         'timeMax': (new Date(now.getTime() + 14*24*60*60*1000)).toISOString(),
         'showDeleted': false,
         'singleEvents': true,
-        'maxResults': 10,
+        'maxResults': 1,
         'orderBy': 'startTime',
       };
       // @ts-ignore
@@ -134,18 +102,27 @@ export default function Events({apiKey, clientId}: {apiKey: string, clientId: st
 
     // Flatten to string to display
     // OUTPUT
-    // todo: do something bruv
-    return events;
+    setFetchedEvents(events);
   }
 
-  useLayoutEffect(() => {
-    document.getElementById('signout_button')!.style.visibility = 'hidden';
-  }, []);
-
   return <>
-    <Button id="authorize_button" onClick={handleAuthClick}>{authLabel}</Button>
-    <Button id="signout_button" onClick={handleSignoutClick}>Sign Out</Button>
-    {/* todo: move this buttons to tasks/pomodoro */}
+    <Button id="authorize_button" fullWidth onClick={handleAuthClick}>{authLabel}</Button>
+
+    <div>
+      { fetchedEvents &&
+        fetchedEvents.map((event: GoogleCalEventType) => {
+          const date = new Date(event.start.dateTime as string);
+          return <Link href={event.hangoutLink} key={event.id}>
+            <div className={`calendar-event-single border-orange-rgb text-orange-rgb hover:bg-orange-rgb hover:text-white-rgb`}>
+              {`${date.toLocaleDateString()} ${date.toLocaleTimeString()}`}<br />
+              {event.summary}<br />
+            </div>
+          </Link>
+        })
+      }
+    </div>
+
+    {/* some err note */}
     <pre id="err"></pre>
     <Script src={"https://apis.google.com/js/api.js"} defer={true} async={true} onLoad={handleOnApiLoad}/>
     <Script src={"https://accounts.google.com/gsi/client"} defer={true} async={true} onLoad={handleOnGsiLoad}/>
