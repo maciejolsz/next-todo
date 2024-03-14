@@ -16,7 +16,7 @@ const robotoSlab = Roboto_Slab({ subsets: ['latin'] });
 type TaskListProps = { type: TaskStatusType, tasks: TaskType[], isOver: boolean, customRef: (element: HTMLElement | null) => void; }
 
 export default function TaskListFull({ type, tasks, isOver, customRef }: TaskListProps) {
-  const isOverClass = isOver ? "opacity-50" : undefined;
+  const isOverClass = isOver ? "opacity-50 blur-sm" : undefined;
   // contains recently updated formState - edit/delete
   const [status, setStatus] = useState("");
   // set on task options click, stores task data
@@ -52,7 +52,7 @@ export default function TaskListFull({ type, tasks, isOver, customRef }: TaskLis
   useHandleTaskFormModal({formState: editFormState, ...commonFormProps});
   useHandleTaskFormModal({formState: deleteFormState, ...commonFormProps});
 
-  return <div ref={customRef} className={`w-full h-full ${isOverClass}`}>
+  return <div ref={customRef} className={`w-full h-full transition-all duration-100 ease-linear ${isOverClass}`}>
     <div className={`w-full mb-2 text-lg capitalize ${robotoSlab.className}`}>
       {kebabToText(type)}
     </div>

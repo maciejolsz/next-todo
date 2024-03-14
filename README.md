@@ -1,12 +1,10 @@
 ## Just Another TODO App
 
-1. Manage your tasks in a "Get things done" way,
-2. Synchronise your google calendar,
+1. Check your cal,
+2. Manage your tasks in a "Get things done" way,
 3. Start pomodoro session!
 
 ### TODOs:
-1. Edit task modal -> let user change status in there.
-2. Sync Google Cal under /calendar
-3. Add some cal widgets like "coming event" under /tasks
-3. On pomodoro page let user to select moody music + set timer. 
-4. Add timer widget if pomodoro is active.
+1. Implement embeded spotify player or some other kind of music,
+2. Add login page, 
+3. QOL features.

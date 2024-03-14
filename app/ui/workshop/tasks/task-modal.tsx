@@ -26,7 +26,7 @@ export default function TaskModal({selectedTask, openModal, handleModalToggle, f
     aria-describedby="modal-modal-description"
   >
     <Box className={"bg-white-rgb absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/4 shadow-2xl p-4"}>
-      <Title tier={"h2"} text={"Edit task:"}/>
+      <Title tier={"h2"}>Edit task:</Title>
       <form action={formAction}>
         <TextField id="name"
                    name="name"

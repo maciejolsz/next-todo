@@ -10,5 +10,5 @@ export default function TaskListSection({type, tasks}: {type: TaskStatusType, ta
 
   return <div key={type} className={`${styles.tasksSection} ${doubleClass} ${doneClass} ${onItClass}`}>
       <TaskList type={type} tasks={tasks.filter((task) => task.status === type)}/>
-    </div>;
+    </div>
 }

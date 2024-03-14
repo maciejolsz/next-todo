@@ -5,13 +5,13 @@ const robotoSlab = Roboto_Slab({ subsets: ['latin'] })
 
 type HeaderProps = {
   tier?: "h1" | "h2" | "h3";
-  text: string;
+  children: string;
 };
 
-export default function Title({tier = "h1", text}: HeaderProps) {
+export default function Title({tier = "h1", children}: HeaderProps) {
   return createElement(
     tier,
     { className: `${robotoSlab.className}` },
-    text
+    children
   );
 }

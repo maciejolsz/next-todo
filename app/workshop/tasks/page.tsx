@@ -9,7 +9,7 @@ import { fetchTasks } from "@/app/lib/fetch-data";
 export default async function Page() {
   const tasks = await fetchTasks();
   return <main>
-    <Title text={"Tasks"} />
+    <Title>Tasks</Title>
 
     <div className={""}>
       <AddTask />
