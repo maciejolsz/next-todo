@@ -8,6 +8,8 @@ type UseHandleTaskFormModalProps = {
   closeModal: () => void,
   openSnack: () => void
 }
+// logic used to handle events after create/edit/delete tasks
+// once formState changes we need to set status, close modal, then open snack with status
 export const useHandleTaskFormModal = ({formState, closeModal, openSnack, setStatus}: UseHandleTaskFormModalProps) => {
   useEffect(() => {
     if (!formState?.type) return;

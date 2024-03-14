@@ -7,7 +7,7 @@ export type TaskType = {
   created_at?: Date;
 };
 
-export type TaskStatusType = "new" | "next" | "on-it" | "project" | "blocked" | "done";
+export type TaskStatusType = "new" | "next" | "on-it" | "project" | "blocked" | "done" | "archived";
 
 export type HandleToggle = {
   open: () => void;

@@ -43,8 +43,8 @@ export default function TaskDraggable({task, setSelectedTask, setAnchorEl, openM
             <BiDotsVerticalRounded className={"block mt-1 float-right rounded-full hover:bg-gray-300"} size={18}
                                onClick={(e) => {
                                  e.stopPropagation(); // mute dragging
-                                 setSelectedTask(task); // to handle actions properly
-                                 setAnchorEl(e.currentTarget); // selected icon becomes anhor for <Menu />
+                                 setSelectedTask(task); // we need task id to handle actions properly
+                                 setAnchorEl(e.currentTarget); // selected icon becomes anchor element for <Menu />
                                  openMenu();
                                }} />
           </div>
@@ -55,8 +55,7 @@ export default function TaskDraggable({task, setSelectedTask, setAnchorEl, openM
       <hr/>
       <AccordionDetails>
         <Typography variant={"body2"}>
-          ID: {task.id} <br />
-          Details: {task.details}
+          <p>{task.details}</p>
         </Typography>
       </AccordionDetails>
     </Accordion>

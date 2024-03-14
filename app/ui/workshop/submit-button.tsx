@@ -2,10 +2,20 @@ import { useFormStatus } from "react-dom";
 
 import { Button } from "@mui/material";
 
-export default function SubmitButton({size}: {size: "mini" | "full"}) {
+type SubmitButtonProps = {
+  size?: "mini" | "full";
+  text?: string;
+  textAlt?: string;
+}
+
+export default function SubmitButton({ size,
+                                       text = "Submit",
+                                       textAlt = "Submitting..."}: SubmitButtonProps) {
   const { pending } = useFormStatus();
+
   const getSize = () => {
     if (size === "mini") return;
+
     return { width: "100%" }
   }
 
@@ -14,6 +24,6 @@ export default function SubmitButton({size}: {size: "mini" | "full"}) {
                  color={"primary"}
                  sx={getSize()}
                  >
-    {!pending ? "Submit" : "Submitting..." }
+    {!pending ? text : textAlt }
   </Button>
 }

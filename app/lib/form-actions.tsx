@@ -121,3 +121,18 @@ export async function changeTaskStatus(taskId: UniqueIdentifier, newStatus: Task
 
   return {message: "Task updated successfully", type: "success"}
 }
+
+export async function archiveAllDoneTasks() {
+  try {
+    await sql`
+      UPDATE tasks SET status = 'archived' WHERE status = 'done' 
+    `
+  } catch (err) {
+    console.log('err', err);
+    return { message: 'Failed to archive Tasks', type: "error" }
+  }
+
+  revalidatePath('/workshop/tasks');
+
+  return {message: "Task updated successfully", type: "success"}
+}
