@@ -1,17 +1,15 @@
 import { useState } from "react";
 import { useFormState } from "react-dom";
-import { Roboto_Slab } from "next/font/google";
 
 import { Menu, MenuItem, Snackbar} from "@mui/material";
 
 import TaskModal from "@/app/ui/workshop/tasks/task-modal";
 import { HandleToggle, TaskStatusType, TaskType } from "@/app/lib/types";
 import { deleteTask, editTask } from "@/app/lib/form-actions";
-import { kebabToText } from "@/app/lib/helpers";
 import { useHandleTaskFormModal } from "@/app/lib/hooks";
 import TaskDraggable from "@/app/ui/workshop/tasks/task-draggable";
+import TaskListHeader from "@/app/ui/workshop/tasks/task-list-header";
 
-const robotoSlab = Roboto_Slab({ subsets: ['latin'] });
 
 type TaskListProps = { type: TaskStatusType, tasks: TaskType[], isOver: boolean, customRef: (element: HTMLElement | null) => void; }
 
@@ -53,9 +51,7 @@ export default function TaskListFull({ type, tasks, isOver, customRef }: TaskLis
   useHandleTaskFormModal({formState: deleteFormState, ...commonFormProps});
 
   return <div ref={customRef} className={`w-full h-full transition-all duration-100 ease-linear ${isOverClass}`}>
-    <div className={`w-full mb-2 text-lg capitalize ${robotoSlab.className}`}>
-      {kebabToText(type)}
-    </div>
+    <TaskListHeader type={type} />
 
     <ul>
       {tasks.map((task) => {
