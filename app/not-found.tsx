@@ -13,5 +13,5 @@ export default function NotFound() {
         <Link href={"/workshop"}><MyButton title={"move along"} /></Link>
       </div>
     </div>
-  </main>;
+  </main>
 }
