@@ -167,8 +167,8 @@ export default function Pomodoro({onItTasks, themes}: PomodoroSettingsProps) {
       aria-describedby="modal-modal-description"
     >
       <Box className={"bg-white-rgb absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/4 shadow-2xl p-4"}>
-        <Title tier={"h3"}>{selectedTask.name}</Title>
-        <p className={"text-center"}>{selectedTask.details}</p>
+        <Title tier={"h3"}>{selectedTask ? selectedTask.name : "Just go with the flow!"}</Title>
+        <p className={"text-center"}>{selectedTask ? selectedTask.details : "Doing nothing is very hard to do, you never know when you are finished."}</p>
         <Timer minutes={sessionTime} />
         <Button type={"submit"}
                 color={"primary"}
