@@ -4,41 +4,36 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 
 import {
-  Box,
   Button,
   FormControl,
   InputLabel,
   MenuItem,
-  Modal,
   Select,
   ToggleButton,
   ToggleButtonGroup
 } from "@mui/material";
 
 import Title from "@/app/ui/title";
-import { TaskType } from "@/app/lib/types";
-import Timer from "@/app/components/timer";
+import { MusicThemeType, TaskType } from "@/app/lib/types";
+import PomodoroModal from "@/app/ui/workshop/pomodoro/pomodoro-timer";
 
 type PomodoroSettingsProps = {
   onItTasks: TaskType[];
-  themes: {
-    id: number;
-    name: string;
-  }[]
+  themes: MusicThemeType[]
 }
 
-const musicMap = [
-  { type: "None", fileName: "" },
-  { type: "Hip-Hop", fileName: "/music-themes/lofihiphop.mp3" },
-  { type: "Jazz", fileName: "/music-themes/lofijazz.mp3" },
-];
-const DEFAULT_THEME = "None";
+const URL_PROTO = "http://";
 
+// this component displays pomodoro session settings
+// allows to start pomodoro session that shows PomodoroModal on click
+// modal displays timer with task details and time remaining
 export default function Pomodoro({onItTasks, themes}: PomodoroSettingsProps) {
+  const DEFAULT_THEME = themes.find(theme => theme.name === "None") || themes[0];
+  const [alarm, setAlarm] = useState<HTMLAudioElement>();
   const [openModal, setOpenModal] = useState(false);
   const [sessionMuted, setSessionMuted] = useState(false);
   const [sessionTime, setSessionTime] = useState<number>(25);
-  const [myTheme, setMyTheme] = useState<string>(DEFAULT_THEME);
+  const [selectedTheme, setSelectedTheme] = useState<MusicThemeType>(DEFAULT_THEME);
   const [audioSelected, setAudioSelected] = useState<HTMLAudioElement>();
   const [selectedTask, setSelectedTask] = useState<TaskType>(onItTasks[0]);
 
@@ -71,14 +66,18 @@ export default function Pomodoro({onItTasks, themes}: PomodoroSettingsProps) {
     setSessionTime(parseInt(event.target.value));
   }
 
-  const handleThemeChange = (theme: string) => {
+  const handleThemeChange = (themeName: string) => {
+    const theme = themes.find(theme => theme.name === themeName);
     audioSelected?.pause();
+
+    if (!theme) return;
+
     const audioFile = prepareAudio(theme);
 
-    if (!audioFile.src) return setAudioSelected(undefined);
+    if (!audioFile?.src) return setAudioSelected(undefined);
 
     setAudioSelected(audioFile);
-    setMyTheme(theme);
+    setSelectedTheme(theme);
   }
 
   const handleTaskChange = (event: any) => {
@@ -87,12 +86,14 @@ export default function Pomodoro({onItTasks, themes}: PomodoroSettingsProps) {
   }
 
   useEffect(() => {
+    setAlarm(new Audio("/alarm.mp3"));
     // initial load of hip hop track
     setAudioSelected(prepareAudio(DEFAULT_THEME));
   }, []);
 
-  function prepareAudio(theme: string) {
-    const audioFile = new Audio(musicMap.find(music => music.type === theme)?.fileName.toString())
+  function prepareAudio(theme: MusicThemeType) {
+    if (!theme.url) return;
+    const audioFile = new Audio(URL_PROTO + theme.url)
     audioFile.loop = true;
     return audioFile;
   }
@@ -129,10 +130,10 @@ export default function Pomodoro({onItTasks, themes}: PomodoroSettingsProps) {
         <Select labelId="theme-label"
                 id="theme"
                 label="Theme"
-                value={myTheme}
+                value={selectedTheme.name}
                 onChange={(e) => handleThemeChange(e.target.value)}
                 required>
-          {themes.map((theme: { id: number, name: string }) => {
+          {themes.map((theme: MusicThemeType) => {
             return <MenuItem key={theme.id} value={theme.name}>{theme.name}</MenuItem>
           })}
         </Select>
@@ -160,25 +161,10 @@ export default function Pomodoro({onItTasks, themes}: PomodoroSettingsProps) {
       </Button>
     </div>
 
-    <Modal
-      open={openModal}
-      onClose={handleOnCloseModal}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-    >
-      <Box className={"bg-white-rgb absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/4 shadow-2xl p-4"}>
-        <Title tier={"h3"}>{selectedTask ? selectedTask.name : "Just go with the flow!"}</Title>
-        <p className={"text-center"}>{selectedTask ? selectedTask.details : "Doing nothing is very hard to do, you never know when you are finished."}</p>
-        <Timer minutes={sessionTime} />
-        <Button type={"submit"}
-                color={"primary"}
-                fullWidth
-                onClick={handleSessionToggle}
-                disabled={!audioSelected}
-        >
-          { sessionMuted ? "Unmute" : "Mute" }
-        </Button>
-      </Box>
-    </Modal>
+    { alarm && <PomodoroModal openModal={openModal} onClose={handleOnCloseModal} onToggle={handleSessionToggle}
+                    muteDisabled={!audioSelected} sessionMuted={sessionMuted}
+                    alarm={alarm}
+                    selectedTask={selectedTask}
+                    sessionTime={sessionTime}/> }
   </div>
 }

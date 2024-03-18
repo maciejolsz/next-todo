@@ -3,8 +3,9 @@
 import Link from "next/link";
 import MyButton from "@/app/ui/my-button";
 import { Roboto_Slab } from "next/font/google"
-import { BiListCheck, BiCalendar, BiTimer, BiHomeAlt, BiFace, BiWrench } from "react-icons/bi";
+import { BiListCheck, BiCalendar, BiTimer, BiHomeAlt, BiWrench } from "react-icons/bi";
 import { usePathname } from "next/navigation";
+import { RiSettings2Line } from "react-icons/ri";
 
 const robotoSlab = Roboto_Slab({ subsets: ['latin'] })
 
@@ -17,7 +18,7 @@ const menuItems = [
 
 export default function PageHeader() {
   const currentPath = usePathname();
-  const workshopPath = "/workshop/profile";
+  const settingsPath = "/workshop/settings";
   const iconClass = "inline pb-1";
 
   return <div className="w-full py-[40px] flex-row justify-between items-center inline-flex">
@@ -39,9 +40,9 @@ export default function PageHeader() {
     </nav>
 
     <div>
-      <Link href={workshopPath}>
-        <MyButton title={"Profile"} isActive={currentPath === workshopPath}>
-          <BiFace size="24" className={iconClass} />
+      <Link href={settingsPath}>
+        <MyButton title={"Settings"} isActive={currentPath === settingsPath}>
+          <RiSettings2Line size="24" className={iconClass} />
         </MyButton>
       </Link>
     </div>

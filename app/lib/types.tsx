@@ -14,6 +14,17 @@ export type HandleToggle = {
   close: () => void;
 };
 
+export type MusicThemeType = {
+  id?: string;
+  name: string;
+  url?: string;
+}
+
+export type TimerType = {
+  id?: string;
+  duration: number;
+}
+
 
 export type GoogleCalEventType = {
   "kind": "calendar#event",

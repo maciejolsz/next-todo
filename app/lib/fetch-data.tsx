@@ -1,7 +1,9 @@
-import {unstable_noStore as noStore} from "next/cache";
-import {sql} from "@vercel/postgres";
-import {TaskType} from "@/app/lib/types";
-import {UniqueIdentifier} from "@dnd-kit/core";
+import { unstable_noStore as noStore } from "next/cache";
+
+import { sql } from "@vercel/postgres";
+
+import { MusicThemeType, TaskType } from "@/app/lib/types";
+import { UniqueIdentifier } from "@dnd-kit/core";
 
 export async function fetchTasks() {
   noStore();
@@ -30,5 +32,19 @@ export async function fetchTask(id: UniqueIdentifier) {
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch tasks.');
+  }
+}
+
+export async function fetchMusicThemes() {
+  noStore();
+  try {
+    const themes = await sql<MusicThemeType>`
+      SELECT * FROM music_themes
+    `;
+
+    return themes.rows;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch themes.');
   }
 }
