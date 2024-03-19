@@ -12,10 +12,12 @@
 .doubleRow {
     @apply row-start-1 row-end-3
 }
-.doneCol {
-    @apply col-start-4
+.doubleCol {
+    @apply col-start-3 col-end-5
 }
 .onItClass {
-    @apply bg-orange-rgb text-white-rgb
+    @apply bg-orange-rgb text-white-rgb border-orange-rgb
 }
-
+.nextClass {
+    @apply col-start-2
+}
