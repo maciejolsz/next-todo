@@ -81,7 +81,7 @@ export default function Pomodoro({onItTasks, themes}: PomodoroSettingsProps) {
   }
 
   const handleTaskChange = (event: any) => {
-    const task = onItTasks.find(task => task.id === event.target.value);
+    const task = onItTasks.find(task => task.id === event);
     if (task) setSelectedTask(task);
   }
 

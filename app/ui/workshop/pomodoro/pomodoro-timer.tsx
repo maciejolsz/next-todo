@@ -1,4 +1,5 @@
-import {Box, Button, Modal} from "@mui/material";
+import { Box, Button, Modal } from "@mui/material";
+
 import Title from "@/app/ui/title";
 import Timer from "@/app/components/timer";
 import { TaskType } from "@/app/lib/types";
