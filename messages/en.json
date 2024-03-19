@@ -1,5 +1,7 @@
 {
   "Index": {
-    "home": "/Home"
+    "home": "/Home",
+    "404-txt": "Nothing to see here,",
+    "404-btn": "move along"
   }
 }
