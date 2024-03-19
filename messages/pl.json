@@ -2,6 +2,14 @@
   "Index": {
     "home": "/Dom",
     "404-txt": "Nic tu nie ma,",
-    "404-btn": "proszę dalej"
+    "404-btn": "proszę dalej",
+    "nav-menu": {
+      "workshop": "Warsztat.",
+      "home": "Dom",
+      "calendar": "Kalendarz",
+      "tasks": "Taski",
+      "pomodoro": "Pomidor",
+      "settings": "Ustawienia"
+    }
   }
 }

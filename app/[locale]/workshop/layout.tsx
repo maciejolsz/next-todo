@@ -1,4 +1,4 @@
-import PageHeader from "@/app/ui/workshop/page-header";
+import PageHeader from "@/app/[locale]/workshop/page-header";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
