@@ -10,7 +10,7 @@ const CreateTaskFormSchema = z.object({
   name: z.string(),
   details: z.string(),
   priority: z.enum(['low', 'normal', 'high']),
-  status: z.enum(["new", "on-it", "next", "project", "waiting", "done", "trash"])
+  status: z.enum(["new", "on-it", "next", "project", "blocked", "done", "archived"])
 });
 
 export type TaskState = {

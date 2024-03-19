@@ -5,12 +5,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <div className="w-full">
       <div className="content">
         <PageHeader />
-
         <section>
           {children}
         </section>
-
-        {/*<Footer />*/}
       </div>
     </div>
   );

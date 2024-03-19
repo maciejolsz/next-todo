@@ -42,8 +42,7 @@ export default function TaskModal({selectedTask, openModal, handleModalToggle, f
                    variant="outlined"
                    minRows={2}
                    sx={{my: 1, width: "100%"}}
-                   defaultValue={defaultValues.details}
-                   required />
+                   defaultValue={defaultValues.details} />
         <Box sx={{my: 1, width: "100%"}}>
           <FormControl fullWidth>
             <InputLabel id="priority">Priority</InputLabel>
