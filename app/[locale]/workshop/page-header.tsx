@@ -11,7 +11,7 @@ const robotoSlab = Roboto_Slab({ subsets: ['latin'] })
 
 export default function PageHeader() {
   const locale = useLocale();
-  const t = useTranslations("Index");
+  const t = useTranslations("workshop");
 
   const settingsPath = "workshop/settings";
   const iconClass = "inline pb-1";
@@ -26,7 +26,7 @@ export default function PageHeader() {
   return <div className="w-full py-[40px] flex-row justify-between items-center inline-flex">
     <div className={`text-[32px] text-orange-rgb ${robotoSlab.className}`}>
       <Link href={`/${locale}/workshop`}>
-        <BiWrench size="32" className={"inline pb-1 mr-1"}/><span className={"hover:underline"}>${t('nav-menu.workshop')}</span>
+        <BiWrench size="32" className={"inline pb-1 mr-1"}/><span className={"hover:underline"}>{t('nav-menu.workshop')}</span>
       </Link>
     </div>
 

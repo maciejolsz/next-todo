@@ -2,7 +2,9 @@
   "Index": {
     "home": "/Home",
     "404-txt": "Nothing to see here,",
-    "404-btn": "move along",
+    "404-btn": "move along"
+  },
+  "workshop": {
     "nav-menu": {
       "workshop": "Workshop.",
       "home": "Home",
@@ -10,6 +12,42 @@
       "tasks": "Tasks",
       "pomodoro": "Pomidoro",
       "settings": "Settings"
+    },
+    "home": {
+      "title": "Where do we start?",
+      "cards": {
+        "calendar": {
+          "title": "Calendar",
+          "desc": "Keep up with everything!",
+          "subDesc": "You don’t wanna miss a thing..."
+        },
+        "tasks": {
+          "title": "Tasks",
+          "desc": "Manage your tasks ezpz!",
+          "subDesc": "One thing at a time..."
+        },
+        "pomodoro": {
+          "title": "Pomodoro",
+          "desc": "Let's get to it!",
+          "subDesc": "Remember to take a break!"
+        }
+      }
+    },
+    "tasks": {
+      "title": "Tasks",
+      "addTask": {
+        "btnLabel": "Add task",
+        "title": "Task settings",
+        "name": "Name",
+        "details": "Details",
+        "priority": "Priority",
+        "prioLow": "Low",
+        "prioNormal": "Normal",
+        "prioHigh": "High",
+        "close": "Close",
+        "submit": "Submit",
+        "submitting": "Submitting..."
+      }
     }
   }
 }

@@ -2,7 +2,9 @@
   "Index": {
     "home": "/Dom",
     "404-txt": "Nic tu nie ma,",
-    "404-btn": "proszę dalej",
+    "404-btn": "zapraszam wypierdalać"
+  },
+  "workshop": {
     "nav-menu": {
       "workshop": "Warsztat.",
       "home": "Dom",
@@ -10,6 +12,42 @@
       "tasks": "Taski",
       "pomodoro": "Pomidor",
       "settings": "Ustawienia"
+    },
+    "home": {
+      "title": "Od czego zaczniemy?",
+      "cards": {
+        "calendar": {
+          "title": "Kalendarz",
+          "desc": "Bądź na bieżąco!",
+          "subDesc": "Nie chcesz nic przegapić..."
+        },
+        "tasks": {
+          "title": "Taski",
+          "desc": "Zarządzanie dla każdego!",
+          "subDesc": "Zacznijmy od początku..."
+        },
+        "pomodoro": {
+          "title": "Pomidor",
+          "desc": "Do roboty!",
+          "subDesc": "Pamiętaj o przerwie!"
+        }
+      }
+    },
+    "tasks": {
+      "title": "Taski",
+      "addTask": {
+        "btnLabel": "Dodaj taska",
+        "title": "Ustawienia",
+        "name": "Nazwa",
+        "details": "Szczegóły",
+        "priority": "Priorytet",
+        "prioLow": "Niski",
+        "prioNormal": "Normalny",
+        "prioHigh": "Wysoki",
+        "close": "Zamknij",
+        "submit": "Wyślij",
+        "submitting": "Wysyłam..."
+      }
     }
   }
 }
