@@ -2,7 +2,9 @@ import styles from "@/app/ui/workshop/tasks/styles.module.css";
 import TaskList from "@/app/ui/workshop/tasks/task-list";
 import { TaskStatusType, TaskType } from "@/app/lib/types";
 
-export default function TaskListSection({type, tasks}: {type: TaskStatusType, tasks: TaskType[]}) {
+type TaskListSectionProps = { type: TaskStatusType; tasks: TaskType[]; }
+
+export default function TaskListSection({type, tasks}: TaskListSectionProps) {
   const doubleRowSections = ["next"];
   const doubleColSections = ["on-it"];
 
@@ -13,6 +15,6 @@ export default function TaskListSection({type, tasks}: {type: TaskStatusType, ta
   const nextClass = type === "next" ? styles.nextClass : "";
 
   return <div key={type} className={`${styles.tasksSection} ${doubleColClass} ${onItClass} ${nextClass} ${doubleRowClass}`}>
-      <TaskList type={type} tasks={tasks.filter((task) => task.status === type)}/>
+        <TaskList type={type} tasks={tasks.filter((task) => task.status === type)} />
     </div>
 }

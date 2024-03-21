@@ -7,6 +7,7 @@ import Script from "next/script";
 import {Button} from "@mui/material";
 
 import {GoogleCalEventType} from "@/app/lib/types";
+import {useTranslations} from "next-intl";
 
 type EventsProps = {
   apiKey: string;
@@ -14,7 +15,8 @@ type EventsProps = {
   calendarIds: string[];
 }
 export default function Events({apiKey, clientId, calendarIds}: EventsProps) {
-  const [authLabel, setAuthLabel] = useState("Authorize to load events");
+  const t = useTranslations();
+  const [authLabel, setAuthLabel] = useState(t("pomodoro.authDefault"));
   const [fetchedEvents, setFetchedEvents] = useState([]);
 
   let tokenClient: any;
@@ -46,7 +48,7 @@ export default function Events({apiKey, clientId, calendarIds}: EventsProps) {
       if (resp.error !== undefined) {
         throw (resp);
       }
-      setAuthLabel("Refresh");
+      setAuthLabel(t("pomodoro.refresh"));
       await listUpcomingEvents();
     };
 
@@ -132,5 +134,5 @@ export default function Events({apiKey, clientId, calendarIds}: EventsProps) {
     <pre id="err"></pre>
     <Script src={"https://apis.google.com/js/api.js"} defer={true} async={true} onLoad={handleOnApiLoad}/>
     <Script src={"https://accounts.google.com/gsi/client"} defer={true} async={true} onLoad={handleOnGsiLoad}/>
-  </>;
+  </>
 }

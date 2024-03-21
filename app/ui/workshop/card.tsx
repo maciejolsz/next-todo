@@ -2,13 +2,16 @@ import type { IconType } from "react-icons";
 import {Roboto, Roboto_Slab} from "next/font/google";
 import { twMerge } from "tailwind-merge";
 import Link from "next/link";
+import {useTranslations} from "next-intl";
 
 export type CardType = {
-  icon: IconType;
-  title: string;
-  desc: string;
-  subDesc: string;
   href: string;
+  icon: IconType;
+  type: string;
+
+  title?: string;
+  desc?: string;
+  subDesc?: string;
   className?: string;
 };
 
@@ -16,6 +19,12 @@ const roboto = Roboto({ subsets: ['latin'], weight: "400" })
 const robotoSlab = Roboto_Slab({ subsets: ['latin'] })
 
 export default function Card(props: CardType) {
+  const t = useTranslations("workshop");
+
+  const title = `home.cards.${props.type}.title`;
+  const desc = `home.cards.${props.type}.desc`;
+  const subDesc = `home.cards.${props.type}.subDesc`;
+
   const CardIcon = props.icon;
   return <div className={twMerge("basis-1/3 hover:scale-110 transition-all duration-100 ease-linear hover:shadow-2xl", props.className ? `${props.className}` : "")}>
     <Link href={props.href}>
@@ -24,13 +33,13 @@ export default function Card(props: CardType) {
       </div>
       <div className={"w-full pl-6 pb-6 pr-6 bg-white"}>
         <div className={`text-black text-lg leading-relaxed ${robotoSlab.className}`}>
-          {props.title}
+          {t(title)}
         </div>
         <p className={`text-orange-400 text-sm leading-relaxed ${roboto.className}`}>
-          {props.desc}
+          {t(desc)}
         </p>
         <p className={`text-neutral-500 text-sm leading-normal ${roboto.className}`}>
-          {props.subDesc}
+          {t(subDesc)}
         </p>
       </div>
     </Link>

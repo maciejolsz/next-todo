@@ -1,8 +1,12 @@
+"use client"
+
+import { useTranslations } from "next-intl";
+
 import { Box, Button, FormControl, InputLabel, MenuItem, Modal, Select, TextField } from "@mui/material";
 
 import Title from "@/app/ui/title";
 import SubmitButton from "@/app/ui/workshop/submit-button";
-import {HandleToggle, TaskType} from "@/app/lib/types";
+import { HandleToggle, TaskType } from "@/app/lib/types";
 
 type TaskModalPropsType = {
   openModal: boolean;
@@ -11,6 +15,8 @@ type TaskModalPropsType = {
   selectedTask?: TaskType;
 }
 export default function TaskModal({selectedTask, openModal, handleModalToggle, formAction}: TaskModalPropsType) {
+  const t = useTranslations();
+
   const defaultValues: TaskType = {
     name: "",
     details: "",
@@ -26,48 +32,47 @@ export default function TaskModal({selectedTask, openModal, handleModalToggle, f
     aria-describedby="modal-modal-description"
   >
     <Box className={"bg-white-rgb absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/4 shadow-2xl p-4"}>
-      <Title tier={"h2"}>Edit task:</Title>
+      <Title tier={"h2"}>{t('tasks.addTaskModal.title')}</Title>
       <form action={formAction}>
         <TextField id="name"
                    name="name"
-                   label="Task name"
+                   label={t('tasks.addTaskModal.name')}
                    variant="outlined"
                    sx={{my: 1, width: "100%"}}
                    defaultValue={defaultValues.name}
                    required />
         <TextField id="details"
                    name="details"
-                   label="Details"
+                   label={t('tasks.addTaskModal.details')}
                    multiline
                    variant="outlined"
                    minRows={2}
                    sx={{my: 1, width: "100%"}}
-                   defaultValue={defaultValues.details}
-                   required />
+                   defaultValue={defaultValues.details} />
         <Box sx={{my: 1, width: "100%"}}>
           <FormControl fullWidth>
-            <InputLabel id="priority">Priority</InputLabel>
+            <InputLabel id="priority">{t('tasks.addTaskModal.priority')}</InputLabel>
             <Select labelId="priority"
                     id="priority"
                     name="priority"
-                    label="Priority"
+                    label={t('tasks.addTaskModal.priority')}
                     defaultValue={defaultValues.priority}
                     required>
-              <MenuItem value={"low"}>Low</MenuItem>
-              <MenuItem value={"normal"}>Normal</MenuItem>
-              <MenuItem value={"high"}>High</MenuItem>
+              <MenuItem value={"low"}>{t('tasks.addTaskModal.prioLow')}</MenuItem>
+              <MenuItem value={"normal"}>{t('tasks.addTaskModal.prioNormal')}</MenuItem>
+              <MenuItem value={"high"}>{t('tasks.addTaskModal.prioHigh')}</MenuItem>
             </Select>
           </FormControl>
         </Box>
 
         <input type={"hidden"} name={"status"} value={defaultValues.status}/>
 
-        <div className={"flex justify-between"}>
+        <div className={"flex justify-between mt-8"}>
           <Button color={"secondary"}
                   onClick={handleModalToggle.close}>
-            Close
+            {t('tasks.addTaskModal.close')}
           </Button>
-          <SubmitButton size={"mini"}/>
+          <SubmitButton size={"mini"} text={t('tasks.addTaskModal.submit')} textAlt={t('tasks.addTaskModal.submitting')}/>
         </div>
       </form>
     </Box>

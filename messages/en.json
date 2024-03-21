@@ -1,0 +1,90 @@
+{
+  "Index": {
+    "home": "/Home",
+    "404-txt": "Nothing to see here,",
+    "404-btn": "move along",
+    "loading": "Loading..."
+  },
+  "workshop": {
+    "nav-menu": {
+      "workshop": "Workshop.",
+      "home": "Home",
+      "calendar": "Calendar",
+      "tasks": "Tasks",
+      "pomodoro": "Pomidoro",
+      "settings": "Settings"
+    },
+    "home": {
+      "title": "Where do we start?",
+      "cards": {
+        "calendar": {
+          "title": "Calendar",
+          "desc": "Keep up with everything!",
+          "subDesc": "You don’t wanna miss a thing..."
+        },
+        "tasks": {
+          "title": "Tasks",
+          "desc": "Manage your tasks ezpz!",
+          "subDesc": "One thing at a time..."
+        },
+        "pomodoro": {
+          "title": "Pomodoro",
+          "desc": "Let's get to it!",
+          "subDesc": "Remember to take a break!"
+        }
+      }
+    },
+    "tasks": {
+      "title": "Tasks",
+      "menu": {
+        "edit": "Edit",
+        "delete": "Delete",
+        "archiveAll": "Archive all",
+        "archivePrompt": {
+          "title": "Archive all done tasks?",
+          "desc": "You won't be able to restore them nor preview done tasks anymore.",
+          "cancel": "Disagree",
+          "confirm": "Archive All Done Tasks",
+          "confirming": "Archiving..."
+        }
+      },
+      "status": {
+        "new": "New",
+        "next": "Next",
+        "project": "Project",
+        "blocked": "Blocked",
+        "onIt": "On it",
+        "done": "Done"
+      },
+      "addTaskModal": {
+        "btnLabel": "Add task",
+        "title": "Task settings",
+        "name": "Name",
+        "details": "Details",
+        "priority": "Priority",
+        "prioLow": "Low",
+        "prioNormal": "Normal",
+        "prioHigh": "High",
+        "close": "Close",
+        "submit": "Submit",
+        "submitting": "Submitting..."
+      }
+    },
+    "pomodoro": {
+      "title": "Pomodoro",
+      "comingEvents": "Coming events",
+      "authDefault": "Authorize to load events",
+      "refresh": "Refresh",
+      "session": {
+        "title": "Plan your session",
+        "task": "Task",
+        "theme": "Theme",
+        "noTasks": "Check yo tasks!",
+        "mute": "Mute",
+        "unmute": "Unmute",
+        "defaultTitle": "Just go with the flow!",
+        "defaultDetails": "Doing nothing is very hard to do, you never know when you are finished."
+      }
+    }
+  }
+}

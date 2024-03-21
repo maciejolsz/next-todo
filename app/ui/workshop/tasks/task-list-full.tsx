@@ -1,5 +1,8 @@
+"use client"
+
 import { useState } from "react";
 import { useFormState } from "react-dom";
+import { useTranslations } from "next-intl";
 
 import { Menu, MenuItem, Snackbar} from "@mui/material";
 
@@ -10,10 +13,16 @@ import { useHandleTaskFormModal } from "@/app/lib/hooks";
 import TaskDraggable from "@/app/ui/workshop/tasks/task-draggable";
 import TaskListHeader from "@/app/ui/workshop/tasks/task-list-header";
 
-
-type TaskListProps = { type: TaskStatusType, tasks: TaskType[], isOver: boolean, customRef: (element: HTMLElement | null) => void; }
+type TaskListProps = {
+  type: TaskStatusType;
+  tasks: TaskType[];
+  isOver: boolean;
+  customRef: (element: HTMLElement | null) => void;
+}
 
 export default function TaskListFull({ type, tasks, isOver, customRef }: TaskListProps) {
+  const t = useTranslations();
+
   const isOverClass = isOver ? "opacity-50 blur-sm" : undefined;
   // contains recently updated formState - edit/delete
   const [status, setStatus] = useState("");
@@ -82,11 +91,11 @@ export default function TaskListFull({ type, tasks, isOver, customRef }: TaskLis
         handleModalToggle.open();
         handleMenuToggle.close();
       }}>
-        Edit
+        {t("tasks.menu.edit")}
       </MenuItem>
       <MenuItem onClick={handleMenuToggle.close}>
         <form action={deleteFormAction}>
-          <button>Delete</button>
+          <button>{t("tasks.menu.delete")}</button>
         </form>
       </MenuItem>
     </Menu>

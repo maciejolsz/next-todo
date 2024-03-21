@@ -1,0 +1,90 @@
+{
+  "Index": {
+    "home": "/Dom",
+    "404-txt": "Nic tu nie ma,",
+    "404-btn": "zapraszam wypierdalać",
+    "loading": "Wczytywanie..."
+  },
+  "workshop": {
+    "nav-menu": {
+      "workshop": "Warsztat.",
+      "home": "Dom",
+      "calendar": "Kalendarz",
+      "tasks": "Taski",
+      "pomodoro": "Pomidor",
+      "settings": "Ustawienia"
+    },
+    "home": {
+      "title": "Od czego zaczniemy?",
+      "cards": {
+        "calendar": {
+          "title": "Kalendarz",
+          "desc": "Bądź na bieżąco!",
+          "subDesc": "Nie chcesz nic przegapić..."
+        },
+        "tasks": {
+          "title": "Taski",
+          "desc": "Zarządzanie dla każdego!",
+          "subDesc": "Zacznijmy od początku..."
+        },
+        "pomodoro": {
+          "title": "Pomidor",
+          "desc": "Do roboty!",
+          "subDesc": "Pamiętaj o przerwie!"
+        }
+      }
+    },
+    "tasks": {
+      "title": "Taski",
+      "menu": {
+        "edit": "Edytuj",
+        "delete": "Usuń",
+        "archiveAll": "Archiwizuj",
+        "archivePrompt": {
+          "title": "Archiwizować wszystkie taski?",
+          "desc": "Nie będziesz mógł ich już odzyskać ani przeglądać.",
+          "cancel": "Anuluj",
+          "confirm": "Archiwizuj wszystkie taski",
+          "confirming": "Archiwizuję..."
+        }
+      },
+      "status": {
+        "new": "Nowe",
+        "next": "Następne",
+        "project": "Projekt",
+        "blocked": "Zablokowane",
+        "onIt": "W trakcie",
+        "done": "Zrobione"
+      },
+      "addTaskModal": {
+        "btnLabel": "Dodaj taska",
+        "title": "Ustawienia",
+        "name": "Nazwa",
+        "details": "Szczegóły",
+        "priority": "Priorytet",
+        "prioLow": "Niski",
+        "prioNormal": "Normalny",
+        "prioHigh": "Wysoki",
+        "close": "Zamknij",
+        "submit": "Wyślij",
+        "submitting": "Wysyłam..."
+      }
+    },
+    "pomodoro": {
+      "title": "Pomidor",
+      "comingEvents": "Nadchodzące wydarzenia",
+      "authDefault": "Zaloguj się aby wczytać wydarzenia",
+      "refresh": "Odśwież",
+      "session": {
+        "title": "Zaplanuj swoją sesję",
+        "task": "Task",
+        "theme": "Nastrój",
+        "noTasks": "Obczaj taski",
+        "mute": "Wycisz muzykę",
+        "unmute": "Włącz muzykę",
+        "defaultTitle": "Daj się porwać!",
+        "defaultDetails": "Robić 'nic' jest bardzo trudno, bo nigdy nie wiesz kiedy skończysz."
+      }
+    }
+  }
+}

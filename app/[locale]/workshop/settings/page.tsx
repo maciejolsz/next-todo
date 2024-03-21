@@ -6,7 +6,7 @@ import { fetchMusicThemes } from "@/app/lib/fetch-data";
 
 export default async function Page() {
   const themes: MusicThemeType[] = await fetchMusicThemes();
-  const timers: TimerType[] = [];
+  const timers: TimerType[] = [{id: "asd", duration: 5}];
 
   return <main>
     <Title>Settings</Title>

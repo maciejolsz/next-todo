@@ -3,24 +3,19 @@ import { CardType } from "@/app/ui/workshop/card";
 
 export const homeCards: CardType[] = [
   {
-    href: "/workshop/calendar",
+    href: "workshop/calendar",
     icon: BiCalendar,
-    title: "Calendar",
-    desc: "Keep up with everything!",
-    subDesc: "You don’t wanna miss a thing...",
+    type: "calendar",
+
   },
   {
-    href: "/workshop/tasks",
+    href: "workshop/tasks",
     icon: BiListCheck,
-    title: "Tasks",
-    desc: "Manage your tasks ezpz!",
-    subDesc: "One thing at a time...",
+    type: "tasks",
   },
   {
-    title: "Pomodoro",
-    desc: "Let's get to it!",
-    subDesc: "Remember to take a break!",
-    href: "/workshop/pomodoro",
+    href: "workshop/pomodoro",
     icon: BiTimer,
+    type: "pomodoro",
   }
 ]
