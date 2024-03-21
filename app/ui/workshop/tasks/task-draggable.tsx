@@ -1,5 +1,4 @@
-
-import { Dispatch, SetStateAction } from "react";
+import {Dispatch, SetStateAction} from "react";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { RxDragHandleDots1 } from "react-icons/rx";
 
@@ -11,6 +10,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 
 import { TaskType } from "@/app/lib/types";
 import { PriorityIcon } from "@/app/lib/consts";
+import {replacer} from "@/app/lib/helpers";
 
 type TaskProps = {
   task: TaskType;
@@ -23,6 +23,11 @@ export default function TaskDraggable({task, setSelectedTask, setAnchorEl, openM
   const {attributes, listeners, setNodeRef, transform, isDragging} = useDraggable({
     id: task.id!,
   });
+
+  // grab links from task details and replace it with <a href="http://...">[url]</a>
+  const taskDetails = task.details;
+  const linkRegex = /(https?:\/\/)?(www\.)?[^\s]+\.[^\s]+/g;
+  const modifiedStr = { __html: taskDetails.replace(linkRegex, replacer)};
 
   const transformStyle = transform ? { transform: `translate3d(${transform.x}px, ${transform.y}px, 0)` } : undefined;
   const draggingStyle = isDragging ? { opacity: 0.8 } : { opacity: 1 };
@@ -53,11 +58,13 @@ export default function TaskDraggable({task, setSelectedTask, setAnchorEl, openM
       </div>
 
       <hr/>
-      <AccordionDetails>
-        <Typography variant={"body2"}>
-          <span>{task.details}</span>
-        </Typography>
-      </AccordionDetails>
+      <div className={"overflow-x-hidden"}>
+        <AccordionDetails>
+          <Typography variant={"body2"}>
+            <span dangerouslySetInnerHTML={modifiedStr}></span>
+          </Typography>
+        </AccordionDetails>
+      </div>
     </Accordion>
   </div>;
 }

@@ -19,3 +19,17 @@ export function grabGoogleCreds(): { apiKey: string, clientId: string } {
     clientId: process.env.GOOGLE_CLIENT_ID || "",
   };
 }
+
+export function replacer(matched: string): string {
+  let withProtocol = matched
+
+  if(!withProtocol.startsWith("http")) {
+    withProtocol = "http://" + matched
+  }
+
+  return  `<a class="text-orange-rgb"
+              target="_blank"
+              href="${withProtocol}">
+    ${ matched.length > 30 ? matched.slice(0, 30) + "..." : matched }
+  </a>`;
+}
