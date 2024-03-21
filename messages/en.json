@@ -2,7 +2,8 @@
   "Index": {
     "home": "/Home",
     "404-txt": "Nothing to see here,",
-    "404-btn": "move along"
+    "404-btn": "move along",
+    "loading": "Loading..."
   },
   "workshop": {
     "nav-menu": {
@@ -67,6 +68,22 @@
         "close": "Close",
         "submit": "Submit",
         "submitting": "Submitting..."
+      }
+    },
+    "pomodoro": {
+      "title": "Pomodoro",
+      "comingEvents": "Coming events",
+      "authDefault": "Authorize to load events",
+      "refresh": "Refresh",
+      "session": {
+        "title": "Plan your session",
+        "task": "Task",
+        "theme": "Theme",
+        "noTasks": "Check yo tasks!",
+        "mute": "Mute",
+        "unmute": "Unmute",
+        "defaultTitle": "Just go with the flow!",
+        "defaultDetails": "Doing nothing is very hard to do, you never know when you are finished."
       }
     }
   }

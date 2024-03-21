@@ -16,6 +16,7 @@ import {
 import Title from "@/app/ui/title";
 import { MusicThemeType, TaskType } from "@/app/lib/types";
 import PomodoroModal from "@/app/ui/workshop/pomodoro/pomodoro-timer";
+import {useTranslations} from "next-intl";
 
 type PomodoroSettingsProps = {
   onItTasks: TaskType[];
@@ -28,7 +29,9 @@ const URL_PROTO = "http://";
 // allows to start pomodoro session that shows PomodoroModal on click
 // modal displays timer with task details and time remaining
 export default function Pomodoro({onItTasks, themes}: PomodoroSettingsProps) {
+  const t = useTranslations("pomodoro.session");
   const DEFAULT_THEME = themes.find(theme => theme.name === "None") || themes[0];
+
   const [alarm, setAlarm] = useState<HTMLAudioElement>();
   const [openModal, setOpenModal] = useState(false);
   const [sessionMuted, setSessionMuted] = useState(false);
@@ -99,11 +102,11 @@ export default function Pomodoro({onItTasks, themes}: PomodoroSettingsProps) {
   }
 
   return <div className={"main-content w-1/2 mr-2 flex flex-col h-[500px] justify-between"}>
-    <div><Title tier={"h3"}>Plan your session</Title></div>
+    <div><Title tier={"h3"}>{t("title")}</Title></div>
     <div className={"m-auto w-1/2"}>
       {onItTasks.length > 0 &&
         <FormControl fullWidth>
-          <InputLabel id="task-label">Task</InputLabel>
+          <InputLabel id="task-label">{t("task")}</InputLabel>
           <Select labelId="task-label"
                   id="task"
                   label="Task"
@@ -117,19 +120,19 @@ export default function Pomodoro({onItTasks, themes}: PomodoroSettingsProps) {
         </FormControl>
       }
       {onItTasks.length < 1 &&
-        <Link href={"/workshop/tasks"}>
+        <Link href={"tasks"}>
           <div className={"text-center border border-gray-300 hover:border-gray-500 py-4 rounded-s"}>
-            Check yo tasks!
+            {t("noTasks")}
           </div>
         </Link>
       }
     </div>
     <div className={"m-auto w-1/2"}>
       <FormControl fullWidth>
-        <InputLabel id="theme-label">Theme</InputLabel>
+        <InputLabel id="theme-label">{t("theme")}</InputLabel>
         <Select labelId="theme-label"
                 id="theme"
-                label="Theme"
+                label={t("theme")}
                 value={selectedTheme.name}
                 onChange={(e) => handleThemeChange(e.target.value)}
                 required>

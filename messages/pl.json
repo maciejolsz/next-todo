@@ -2,7 +2,8 @@
   "Index": {
     "home": "/Dom",
     "404-txt": "Nic tu nie ma,",
-    "404-btn": "zapraszam wypierdalać"
+    "404-btn": "zapraszam wypierdalać",
+    "loading": "Wczytywanie..."
   },
   "workshop": {
     "nav-menu": {
@@ -67,6 +68,22 @@
         "close": "Zamknij",
         "submit": "Wyślij",
         "submitting": "Wysyłam..."
+      }
+    },
+    "pomodoro": {
+      "title": "Pomidor",
+      "comingEvents": "Nadchodzące wydarzenia",
+      "authDefault": "Zaloguj się aby wczytać wydarzenia",
+      "refresh": "Odśwież",
+      "session": {
+        "title": "Zaplanuj swoją sesję",
+        "task": "Task",
+        "theme": "Nastrój",
+        "noTasks": "Obczaj taski",
+        "mute": "Wycisz muzykę",
+        "unmute": "Włącz muzykę",
+        "defaultTitle": "Daj się porwać!",
+        "defaultDetails": "Robić 'nic' jest bardzo trudno, bo nigdy nie wiesz kiedy skończysz."
       }
     }
   }

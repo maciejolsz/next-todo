@@ -47,7 +47,7 @@ export default function TaskListHeader({type}: {type: TaskStatusType}) {
     <div>
       { type==="on-it" &&
         <div className={"pt-1"}>
-          <Link href={"/workshop/pomodoro"} className={"underline font-bold"}>{"Let's get to work!"}</Link>
+          <Link href={"pomodoro"} className={"underline font-bold"}>{"Let's get to work!"}</Link>
         </div>
       }
 
