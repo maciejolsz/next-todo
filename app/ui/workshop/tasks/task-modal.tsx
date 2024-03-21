@@ -1,3 +1,5 @@
+"use client"
+
 import { useTranslations } from "next-intl";
 
 import { Box, Button, FormControl, InputLabel, MenuItem, Modal, Select, TextField } from "@mui/material";

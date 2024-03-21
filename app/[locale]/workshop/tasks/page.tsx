@@ -13,13 +13,13 @@ export default async function Page() {
   const tasks = await fetchTasks();
   const locale = await getLocale();
   const messages = await getMessages({locale: locale});
-  const taskMsgs = (messages as LocaleMessages).workshop;
+  const workshopMsgs = (messages as LocaleMessages).workshop;
   const t = await getTranslations('workshop');
 
   return <main>
     <Title>{t("tasks.title")}</Title>
     <div className={""}>
-      <NextIntlClientProvider messages={taskMsgs} locale={locale}>
+      <NextIntlClientProvider messages={workshopMsgs} locale={locale}>
         <AddTask />
         <Suspense key={"tasks"} fallback={<TasksManagerSkeleton />}>
           <TasksManagerDnd tasks={tasks}/>
