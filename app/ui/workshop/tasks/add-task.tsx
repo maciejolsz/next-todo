@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useFormState } from 'react-dom';
 import { BiAddToQueue } from "react-icons/bi";
+import { useTranslations } from "next-intl";
 
 import { Snackbar, Button } from '@mui/material';
 
@@ -18,6 +19,8 @@ import { useHandleTaskFormModal } from "@/app/lib/hooks";
  * and it won't add any readability anyway.
  */
 export default function AddTask() {
+  const t = useTranslations();
+
   const [status, setStatus] = useState("");
   const [openModal, setOpenModal] = useState(false);
   const [openSnack, setOpenSnack] = useState(false);
@@ -44,7 +47,7 @@ export default function AddTask() {
       <div className={"mb-4 flex justify-start"}>
         <Button onClick={handleModalToggle.open}>
           <BiAddToQueue className={"inline pb-0 pr-1"} size={"24"} />
-          Add task
+          {t("tasks.addTaskModal.btnLabel")}
         </Button>
         <div>
           <Snackbar
@@ -55,7 +58,6 @@ export default function AddTask() {
           />
         </div>
       </div>
-
       <TaskModal openModal={openModal} handleModalToggle={handleModalToggle} formAction={createFormAction} />
     </>
   )

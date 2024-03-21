@@ -35,7 +35,27 @@
     },
     "tasks": {
       "title": "Taski",
-      "addTask": {
+      "menu": {
+        "edit": "Edytuj",
+        "delete": "Usuń",
+        "archiveAll": "Archiwizuj",
+        "archivePrompt": {
+          "title": "Archiwizować wszystkie taski?",
+          "desc": "Nie będziesz mógł ich już odzyskać ani przeglądać.",
+          "cancel": "Anuluj",
+          "confirm": "Archiwizuj wszystkie taski",
+          "confirming": "Archiwizuję..."
+        }
+      },
+      "status": {
+        "new": "Nowe",
+        "next": "Następne",
+        "project": "Projekt",
+        "blocked": "Zablokowane",
+        "onIt": "W trakcie",
+        "done": "Zrobione"
+      },
+      "addTaskModal": {
         "btnLabel": "Dodaj taska",
         "title": "Ustawienia",
         "name": "Nazwa",

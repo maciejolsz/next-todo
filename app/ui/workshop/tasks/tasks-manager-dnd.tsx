@@ -14,7 +14,7 @@ import { changeTaskStatus } from "@/app/lib/form-actions";
 
 export const taskTypes: TaskStatusType[] = ["new", "next", "on-it", "project", "blocked", "done"];
 
-export default function TasksManagerDnd({tasks}: {tasks: TaskType[]}) {
+export default function TasksManagerDnd({tasks}: {tasks: TaskType[];}) {
   const [activeId, setActiveId] = useState<UniqueIdentifier>();
 
   const [optimisticTasks, moveOptimisticTask] = useOptimistic(

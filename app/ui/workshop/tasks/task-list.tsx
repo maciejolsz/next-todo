@@ -6,7 +6,9 @@ import { TaskStatusType, TaskType } from "@/app/lib/types";
 import TaskListEmpty from "@/app/ui/workshop/tasks/task-list-empty";
 import TaskListFull from "@/app/ui/workshop/tasks/task-list-full";
 
-export default function TaskList({ type, tasks }: { type: TaskStatusType, tasks: TaskType[] }) {
+type TaskListProps = { type: TaskStatusType; tasks: TaskType[]; }
+
+export default function TaskList({ type, tasks }: TaskListProps) {
   const {isOver, setNodeRef} = useDroppable({
     id: type,
   });

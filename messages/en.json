@@ -35,7 +35,27 @@
     },
     "tasks": {
       "title": "Tasks",
-      "addTask": {
+      "menu": {
+        "edit": "Edit",
+        "delete": "Delete",
+        "archiveAll": "Archive all",
+        "archivePrompt": {
+          "title": "Archive all done tasks?",
+          "desc": "You won't be able to restore them nor preview done tasks anymore.",
+          "cancel": "Disagree",
+          "confirm": "Archive All Done Tasks",
+          "confirming": "Archiving..."
+        }
+      },
+      "status": {
+        "new": "New",
+        "next": "Next",
+        "project": "Project",
+        "blocked": "Blocked",
+        "onIt": "On it",
+        "done": "Done"
+      },
+      "addTaskModal": {
         "btnLabel": "Add task",
         "title": "Task settings",
         "name": "Name",
