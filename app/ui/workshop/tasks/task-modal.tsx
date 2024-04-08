@@ -7,6 +7,7 @@ import { Box, Button, FormControl, InputLabel, MenuItem, Modal, Select, TextFiel
 import Title from "@/app/ui/title";
 import SubmitButton from "@/app/ui/workshop/submit-button";
 import { HandleToggle, TaskType } from "@/app/lib/types";
+import {BaseSyntheticEvent, useState} from "react";
 
 type TaskModalPropsType = {
   openModal: boolean;
@@ -14,7 +15,9 @@ type TaskModalPropsType = {
   handleModalToggle: HandleToggle;
   selectedTask?: TaskType;
 }
+const DETAILS_LIMIT = 255;
 export default function TaskModal({selectedTask, openModal, handleModalToggle, formAction}: TaskModalPropsType) {
+  const [detailsLength, setDetailsLength] = useState(selectedTask?.name.length || 0);
   const t = useTranslations();
 
   const defaultValues: TaskType = {
@@ -23,6 +26,10 @@ export default function TaskModal({selectedTask, openModal, handleModalToggle, f
     status: "new",
     priority: "normal",
     ...selectedTask // merge selectedTask into defaultValues
+  }
+
+  const handleDetailsChange = (e: BaseSyntheticEvent) => {
+    setDetailsLength(e.target.value.length);
   }
 
   return <Modal
@@ -48,7 +55,11 @@ export default function TaskModal({selectedTask, openModal, handleModalToggle, f
                    variant="outlined"
                    minRows={2}
                    sx={{my: 1, width: "100%"}}
-                   defaultValue={defaultValues.details} />
+                   defaultValue={defaultValues.details}
+                   inputProps={{maxLength: DETAILS_LIMIT}}
+                   helperText={<span className={"block text-right"}>{detailsLength}/{DETAILS_LIMIT}</span>}
+                   onChange={(event) => handleDetailsChange(event)}
+        />
         <Box sx={{my: 1, width: "100%"}}>
           <FormControl fullWidth>
             <InputLabel id="priority">{t('tasks.addTaskModal.priority')}</InputLabel>
