@@ -1,13 +1,17 @@
-import { Suspense } from "react";
+import {lazy, Suspense} from "react";
 import { getLocale, getMessages, getTranslations } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 
 import AddTask from "@/app/ui/workshop/tasks/add-task";
 import Title from "@/app/ui/title";
 import TasksManagerSkeleton from "@/app/ui/skeletons/tasks-manager";
-import TasksManagerDnd from "@/app/ui/workshop/tasks/tasks-manager-dnd";
+
 import { fetchTasks } from "@/app/lib/fetch-data";
 import { LocaleMessages } from "@/globals";
+
+const TasksManagerDnd = lazy(
+  () => import("@/app/ui/workshop/tasks/tasks-manager-dnd")
+);
 
 export default async function Page() {
   const tasks = await fetchTasks();

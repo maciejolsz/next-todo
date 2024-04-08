@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+import { lazy, Suspense } from "react";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages, getTranslations } from "next-intl/server";
 
@@ -6,9 +6,12 @@ import { fetchMusicThemes, fetchTasks } from "@/app/lib/fetch-data";
 import { MusicThemeType, TaskType } from "@/app/lib/types";
 import Title from "@/app/ui/title";
 import Events from "@/app/ui/workshop/pomodoro/events";
-import Pomodoro from "@/app/ui/workshop/pomodoro/pomodoro";
 import { grabGoogleCreds } from "@/app/lib/helpers";
 import { LocaleMessages } from "@/globals";
+
+const Pomodoro = lazy(
+  () => import("@/app/ui/workshop/pomodoro/pomodoro")
+);
 
 export default async function Page() {
   const locale = await getLocale();
