@@ -1,9 +1,11 @@
 import createMiddleware from 'next-intl/middleware';
 import {NextRequest} from "next/server";
 
+import { auth } from "@/auth"
+
 export async function middleware(request: NextRequest) {
 
-
+  console.log('auth', auth);
 
   console.log('middlewareInternationalization')
 
