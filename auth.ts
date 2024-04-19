@@ -22,7 +22,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   ],
   callbacks: {
     async signIn({ profile }) {
-      return profile?.email?.startsWith(process.env.CALENDAR_ID0!)
+      return profile?.email?.startsWith(process.env.CALENDAR_ID0!) || false;
     },
     // authorized({ auth, request: { nextUrl } }) {
     //   // check if user is authorized to visit nextUrl
