@@ -1,11 +1,9 @@
-import { useTranslations } from "next-intl";
+import Home from "@/app/components/home";
 
-export default function Home() {
-  const t = useTranslations('Index');
-
+export default function Page() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <pre>{t('home')}</pre>
+      <Home />
     </main>
   );
 }

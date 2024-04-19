@@ -5,6 +5,4 @@
 3. Start pomodoro session!
 
 ### TODOs:
-1. Implement embeded spotify player or some other kind of music,
-2. Add login page, 
-3. QOL features.
+1. QOL features.
