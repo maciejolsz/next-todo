@@ -1,9 +1,15 @@
 {
   "Index": {
-    "home": "/Dom",
+    "welcome": "Witaj w",
+    "where-home": "Szukasz",
+    "home": "/DOMu",
+    "unauthorised": "Bez logowania nie ma przeglądania!",
+    "sign-in": "Zaloguj",
+    "sign-out": "Wyloguj",
     "404-txt": "Nic tu nie ma,",
     "404-btn": "zapraszam wypierdalać",
-    "loading": "Wczytywanie..."
+    "loading": "Wczytywanie...",
+    "work": "Praca, praca..."
   },
   "workshop": {
     "nav-menu": {

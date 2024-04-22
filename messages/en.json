@@ -1,9 +1,15 @@
 {
   "Index": {
+    "welcome": "Welcome",
+    "where-home": "Looking for",
     "home": "/Home",
+    "unauthorised": "STOP! Sign in time!",
+    "sign-in": "Sign in",
+    "sign-out": "Sign out",
     "404-txt": "Nothing to see here,",
     "404-btn": "move along",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "work": "Work, work..."
   },
   "workshop": {
     "nav-menu": {
