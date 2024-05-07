@@ -20,7 +20,7 @@ export function grabGoogleCreds(): { apiKey: string, clientId: string } {
   };
 }
 
-export function replacer(matched: string): string {
+export function urlReplacer(matched: string): string {
   let withProtocol = matched
 
   if(!withProtocol.startsWith("http")) {

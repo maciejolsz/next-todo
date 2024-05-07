@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
-export default function Timer({minutes = 25, alarm}: {minutes: number, alarm: HTMLAudioElement}) {
+export default function Timer({minutes = 25, alarm}: { minutes: number, alarm: HTMLAudioElement }) {
   const [timeLeft, setTimeLeft] = useState(minutes * 60);
   const [finished, setFinished] = useState(false);
 

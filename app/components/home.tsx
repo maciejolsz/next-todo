@@ -9,7 +9,8 @@ const Home = async () => {
   const locale = await getLocale();
   const t = await getTranslations();
 
-  return <div>
+  return <div id={"home"}>
+    <h1></h1>
     {!session?.user &&
       <div>
         <div className={"mb-4"}>{t('Index.where-home')} <code>{t('Index.home')}?</code></div>

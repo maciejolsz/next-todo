@@ -10,7 +10,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 
 import { TaskType } from "@/app/lib/types";
 import { PriorityIcon } from "@/app/lib/consts";
-import {replacer} from "@/app/lib/helpers";
+import { urlReplacer } from "@/app/lib/helpers";
 
 type TaskProps = {
   task: TaskType;
@@ -27,7 +27,7 @@ export default function TaskDraggable({task, setSelectedTask, setAnchorEl, openM
   // grab links from task details and replace it with <a href="http://...">[url]</a>
   const taskDetails = task.details;
   const linkRegex = /(https?:\/\/)?(www\.)?[^\s]+\.[^\s]+/g;
-  const modifiedStr = { __html: taskDetails.replace(linkRegex, replacer)};
+  const modifiedStr = { __html: taskDetails.replace(linkRegex, urlReplacer)};
 
   const transformStyle = transform ? { transform: `translate3d(${transform.x}px, ${transform.y}px, 0)` } : undefined;
   const draggingStyle = isDragging ? { opacity: 0.8 } : { opacity: 1 };
